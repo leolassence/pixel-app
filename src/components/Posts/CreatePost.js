@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
+import { Form, Field } from 'react-final-form';
 
 import {
   required,
   minValue,
   composeValidators,
-  isEmail,
-  validatePassword,
 } from '../../assets/helpers/formvalidation';
 
-
-class SignUp extends Component {
-  handleSubmit = ({ email, username, password }) => this.props.signUpUser({
-    email,
-    username,
-    password
+class CreatePost extends Component {
+  handleSubmit = ({
+    title,
+    description,
+    location,
+    coverImage,
+  }) => this.props.createPost({
+    title,
+    description,
+    location,
+    coverImage,
   }, this.props.history);
 
   render() {
@@ -23,65 +26,66 @@ class SignUp extends Component {
       <div className="text-center signin-page">
         <Form
           onSubmit={this.handleSubmit}
-          validate={validatePassword}
           render={({
             handleSubmit,
             form,
             pristine,
           }) => (
             <form className="form-signin" onSubmit={handleSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
-              <Field name="email" validate={composeValidators(required, isEmail)}>
+              <h1 className="h3 mb-3 font-weight-normal">Create Post</h1>
+              <Field name="title" validate={composeValidators(required, minValue(3))}>
                 {({ input, meta }) => (
                   <div>
                     <input
                       {...input}
-                      type="email"
+                      type="title"
                       component="input"
-                      placeholder="Email"
+                      placeholder="Title"
                       className="form-control"
                     />
                     {meta.error && meta.touched && <span className="form-errors">{meta.error}</span>}
                   </div>
                 )}
               </Field>
-              <Field name="username" validate={composeValidators(required, minValue(3))}>
+              <Field name="location" validate={composeValidators(required, minValue(3))}>
                 {({ input, meta }) => (
                   <div>
                     <input
                       {...input}
-                      type="username"
+                      type="location"
                       component="input"
-                      placeholder="Username"
+                      placeholder="Location"
                       className="form-control"
                     />
                     {meta.error && meta.touched && <span className="form-errors">{meta.error}</span>}
                   </div>
                 )}
               </Field>
-              <Field name="password" validate={composeValidators(required, minValue(8))}>
+              <Field name="coverImage" validate={composeValidators(required, minValue(3))}>
                 {({ input, meta }) => (
                   <div>
                     <input
                       {...input}
-                      type="password"
+                      type="coverImage"
                       component="input"
-                      placeholder="Password"
+                      placeholder="Cover Image"
                       className="form-control"
                     />
                     {meta.error && meta.touched && <span className="form-errors">{meta.error}</span>}
                   </div>
                 )}
               </Field>
-              <Field name="repeatPassword" validate={composeValidators(required, minValue(8))}>
+              <Field name="description" validate={composeValidators(required, minValue(10))}>
                 {({ input, meta }) => (
                   <div>
-                    <input
+                    <textarea
                       {...input}
-                      type="password"
-                      component="input"
-                      placeholder="Repeat Password"
+                      type="description"
+                      component="textarea"
+                      placeholder="Description"
                       className="form-control"
+                      cols="5"
+                      rows="3"
                     />
                     {meta.error && meta.touched && <span className="form-errors">{meta.error}</span>}
                   </div>
@@ -100,13 +104,9 @@ class SignUp extends Component {
   }
 }
 
-SignUp.propTypes = {
-  history: PropTypes.shape({}),
-  signUpUser: PropTypes.func.isRequired
+CreatePost.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+  createPost: PropTypes.func.isRequired
 };
 
-SignUp.defaultProps = {
-  history: {}
-};
-
-export default SignUp;
+export default CreatePost;

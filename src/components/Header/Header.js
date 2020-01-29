@@ -16,6 +16,9 @@ class Header extends Component {
           </Link>
         </li>,
         <li key={2} className="nav-item">
+          <Link to="/createpost" className="nav-link">Post</Link>
+        </li>,
+        <li key={3} className="nav-item">
           <Link
             to="/"
             className="nav-link"
@@ -28,10 +31,10 @@ class Header extends Component {
       ];
     }
     return [
-      <li key={3} className="nav-item">
+      <li key={4} className="nav-item">
         <Link to="/signin" className="nav-link">Sign In</Link>
       </li>,
-      <li key={4} className="nav-item">
+      <li key={5} className="nav-item">
         <Link to="/signup" className="nav-link">Sign Up</Link>
       </li>
     ];

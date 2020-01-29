@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// get username from url
-// get user infos from url params
-
 class Profile extends Component {
   componentDidMount() {
     const {

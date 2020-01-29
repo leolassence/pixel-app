@@ -44,9 +44,9 @@ body {
   z-index: 2;
 }
 
-.form-signin input, button {
+.form-signin input, button, textarea {
   margin-bottom: 10px;
-  border: none;
+  border: none !important;
   border-radius: 100;
 }
 
