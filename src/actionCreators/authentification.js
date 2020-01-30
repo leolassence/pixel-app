@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { parseError } from './errors';
 
-const API_ENDPOINT = 'http://localhost:8080';
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const AUTH_ACTIONS = {
   SET_AUTHENTIFICATIONS: 'SET_AUTHENTIFICATIONS',
   PARSE_MESSAGE: 'PARSE_MESSAGE',
@@ -15,11 +15,11 @@ function setAuthentification(isLoggedIn) {
   };
 }
 
-function signInUser({ email, password }, history) {
-  return async function (dispatch) {
+function signInUser({ signInId, password }, history) {
+  return async dispatch => {
     try {
       const response = await axios.post(`${API_ENDPOINT}/signIn`, {
-        email,
+        signInId,
         password
       });
 
@@ -28,15 +28,16 @@ function signInUser({ email, password }, history) {
 
       dispatch(setAuthentification(true));
 
-      history.push('/');
+      return history.push(`/user/${localStorage.getItem('username')}`);
     } catch (error) {
-      dispatch(parseError(error.response.data.message));
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
     }
   };
 }
 
 function signUpUser({ email, username, password }, history) {
-  return async function (dispatch) {
+  return async dispatch => {
     try {
       const response = await axios.post(`${API_ENDPOINT}/signUp`, {
         email,
@@ -49,15 +50,16 @@ function signUpUser({ email, username, password }, history) {
 
       dispatch(setAuthentification(true));
 
-      history.push('/');
+      return history.push(`/user/${localStorage.getItem('username')}`);
     } catch (error) {
-      dispatch(parseError(error.response.data.message));
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
     }
   };
 }
 
 function signOutUser() {
-  return function (dispatch) {
+  return dispatch => {
     dispatch(setAuthentification(false));
     localStorage.removeItem('token');
     localStorage.removeItem('username');

@@ -3,19 +3,24 @@ import axios from 'axios';
 import { parseError } from './errors';
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-const USER_ACTIONS = {
-  GET_USER: 'GET_USER'
+const POST_ACTIONS = {
+  CREATE_POST: 'CREATE_POST'
 };
 
-function getUser({ username }) {
+function createPost(post) {
   return async dispatch => {
     try {
-      const response = await axios.get(`${API_ENDPOINT}/user`, {
-        params: { username }
+      const response = await axios({
+        method: 'post',
+        url: `${API_ENDPOINT}/post/create`,
+        data: post,
+        headers: {
+          authorization: localStorage.getItem('token')
+        }
       });
 
       return dispatch({
-        type: USER_ACTIONS.GET_USER,
+        type: POST_ACTIONS.CREATE_POST,
         payload: response.data
       });
     } catch (error) {
@@ -26,6 +31,6 @@ function getUser({ username }) {
 }
 
 export {
-  USER_ACTIONS,
-  getUser
+  POST_ACTIONS,
+  createPost
 };

@@ -17,6 +17,11 @@ import {
   resetError
 } from './errors';
 
+import {
+  POST_ACTIONS,
+  createPost
+} from './posts';
+
 export {
   ERROR_ACTIONS,
   parseError,
@@ -27,5 +32,7 @@ export {
   signUpUser,
   signOutUser,
   USER_ACTIONS,
-  getUser
+  getUser,
+  POST_ACTIONS,
+  createPost
 };
