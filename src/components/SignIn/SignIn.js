@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import PropTypes from 'prop-types';
+import FormField from '../FormField';
 
 import {
   required,
@@ -29,42 +30,20 @@ class SignIn extends Component {
           }) => (
             <form className="form" onSubmit={handleSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
-              <div className="field">
-                <Field name="signInId" validate={composeValidators(required)}>
-                  {({ input, meta }) => (
-                    <div>
-                      <input
-                        {...input}
-                        type="signInId"
-                        component="input"
-                        placeholder="Email or Username"
-                        className="form-control"
-                      />
-                      <div className="form-errors">
-                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                      </div>
-                    </div>
-                  )}
-                </Field>
-              </div>
-              <div className="field">
-                <Field name="password" validate={composeValidators(required, minValue(8))}>
-                  {({ input, meta }) => (
-                    <div>
-                      <input
-                        {...input}
-                        type="password"
-                        component="input"
-                        placeholder="Password"
-                        className="form-control"
-                      />
-                      <div className="form-errors">
-                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                      </div>
-                    </div>
-                  )}
-                </Field>
-              </div>
+              <FormField
+                name="signInId"
+                type="input"
+                placeholder="Email or Username"
+                component="input"
+                validator={composeValidators(required)}
+              />
+              <FormField
+                name="password"
+                type="password"
+                placeholder="Password"
+                component="input"
+                validator={composeValidators(required, minValue(8))}
+              />
               <div className="buttons">
                 <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={submitting || pristine}>
                   Submit
