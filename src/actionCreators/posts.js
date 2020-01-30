@@ -2,13 +2,13 @@ import axios from 'axios';
 
 import { parseError } from './errors';
 
-const API_ENDPOINT = 'http://localhost:8080';
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const POST_ACTIONS = {
   CREATE_POST: 'CREATE_POST'
 };
 
 function createPost(post) {
-  return async function (dispatch) {
+  return async dispatch => {
     try {
       const response = await axios({
         method: 'post',
@@ -19,12 +19,13 @@ function createPost(post) {
         }
       });
 
-      dispatch({
+      return dispatch({
         type: POST_ACTIONS.CREATE_POST,
         payload: response.data
       });
     } catch (error) {
-      dispatch(parseError(error.response.data.message));
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
     }
   };
 }

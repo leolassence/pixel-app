@@ -12,6 +12,15 @@ const minValue = min => value => value.length >= min ? undefined : `Should be gr
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
+
+const validateUsername = value => {
+  if (value.match(/[^a-z0-9_.]/g, '') === null) {
+    return undefined;
+  }
+
+  return 'Username should be in lowercase and contain only letters numbers or (_ , .))';
+};
+
 const validatePassword = values => {
   const errors = {};
 
@@ -28,5 +37,6 @@ export {
   minValue,
   composeValidators,
   isEmail,
-  validatePassword
+  validatePassword,
+  validateUsername
 };
