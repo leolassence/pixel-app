@@ -53,8 +53,6 @@ body {
   border-radius: 100;
 }
 
-.form-errors {
+.form span {
   color: #e74c3c;
-  text-align: left;
-  font-size: 14px;
 }
