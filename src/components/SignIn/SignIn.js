@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { Form } from 'react-final-form';
 import PropTypes from 'prop-types';
-import FormField from '../FormField';
-
-import {
-  required,
-  minValue,
-  composeValidators
-} from '../../assets/helpers/formvalidation';
+import { Form, Input } from '@rocketseat/unform';
+import schema from './schema';
 
 
 class SignIn extends Component {
@@ -20,38 +14,30 @@ class SignIn extends Component {
   render() {
     return (
       <div className="text-center signin-page">
-        <Form
-          onSubmit={this.handleSubmit}
-          render={({
-            handleSubmit,
-            form,
-            submitting,
-            pristine
-          }) => (
-            <form className="form" onSubmit={handleSubmit}>
-              <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
-              <FormField
-                name="signInId"
-                type="input"
-                placeholder="Email or Username"
-                component="input"
-                validator={composeValidators(required)}
-              />
-              <FormField
-                name="password"
-                type="password"
-                placeholder="Password"
-                component="input"
-                validator={composeValidators(required, minValue(8))}
-              />
-              <div className="buttons">
-                <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={submitting || pristine}>
-                  Submit
-                </button>
-              </div>
-            </form>
-          )}
-        />
+        <Form schema={schema} onSubmit={this.handleSubmit} className="form">
+          <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
+          <div className="field">
+            <Input
+              name="signInId"
+              type="text"
+              placeholder="Email or Username"
+              className="form-control"
+            />
+          </div>
+          <div className="field">
+            <Input
+              name="password"
+              type="password"
+              placeholder="Password"
+              className="form-control"
+            />
+          </div>
+          <div className="buttons">
+            <button className="btn btn-lg btn-primary btn-block" type="submit">
+              Submit
+            </button>
+          </div>
+        </Form>
       </div>
     );
   }
