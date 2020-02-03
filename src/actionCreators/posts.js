@@ -11,7 +11,7 @@ const POST_ACTIONS = {
 function getPost(postId) {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_ENDPOINT}/post/get`, {
+      const { data } = await axios.get(`${API_ENDPOINT}/posts`, {
         params: { postId }
       });
 
@@ -40,7 +40,7 @@ function createPost({ formData, data }, history) {
 
       const { data: { imageId } } = await axios({
         ...requestConfig,
-        url: `${API_ENDPOINT}/upload/image`,
+        url: `${API_ENDPOINT}/images`,
         data: formData,
       });
 
@@ -48,7 +48,7 @@ function createPost({ formData, data }, history) {
 
       const { data: { postId } } = await axios({
         ...requestConfig,
-        url: `${API_ENDPOINT}/post/create`,
+        url: `${API_ENDPOINT}/posts`,
         data: {
           ...data,
           imageId
