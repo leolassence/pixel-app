@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUser, getPosts } from '../../actionCreators';
+import { getUser, getPosts } from '../../actions';
 
 import User from './User';
 

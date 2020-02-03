@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import { parseError, resetError } from '../../actionCreators';
+import { parseError, resetError } from '../../actions';
 import Errors from './Errors';
 
 const mapStateToProps = state => ({

@@ -1,4 +1,4 @@
-import { ERROR_ACTIONS } from '../actionCreators';
+import { ERROR_ACTIONS } from '../actions';
 
 const initialState = {
   message: ''

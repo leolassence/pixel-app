@@ -1,4 +1,4 @@
-import { USER_ACTIONS } from '../actionCreators';
+import { USER_ACTIONS } from '../actions';
 
 const initialState = {
   user: {}

@@ -1,4 +1,4 @@
-import { POST_ACTIONS } from '../actionCreators';
+import { POST_ACTIONS } from '../actions';
 
 const initialState = {
   post: {},

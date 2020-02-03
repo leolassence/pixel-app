@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setAuthentification, signOutUser } from '../../actionCreators';
+import { setAuthentification, signOutUser } from '../../actions';
 import Header from './Header';
 
 const mapStateToProps = state => ({
