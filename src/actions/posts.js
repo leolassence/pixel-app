@@ -6,7 +6,8 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const POST_ACTIONS = {
   GET_POST: 'GET_POST',
   CREATE_POST: 'CREATE_POST',
-  GET_POSTS: 'GET_POSTS'
+  GET_POSTS: 'GET_POSTS',
+  DELETE_POST: 'DELETE_POST',
 };
 
 function getPosts(query, options) {
@@ -88,9 +89,29 @@ function createPost({ formData, data }, history) {
   };
 }
 
+
+function deletePost(postId) {
+  return async dispatch => {
+    try {
+      const { data } = await axios.delete(`${API_ENDPOINT}/posts/${postId}`);
+
+      if (!data) return dispatch(parseError('Internal server Error'));
+
+      return dispatch({
+        type: POST_ACTIONS.DELETE_POST,
+        payload: data
+      });
+    } catch (error) {
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
+    }
+  };
+}
+
 export {
   POST_ACTIONS,
   createPost,
   getPost,
-  getPosts
+  getPosts,
+  deletePost
 };

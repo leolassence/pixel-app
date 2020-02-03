@@ -26,6 +26,14 @@ export default function PostReducer(state = initialState, action) {
         createdPost: action.payload
       };
     }
+    case POST_ACTIONS.DELETE_POST: {
+      return {
+        ...state,
+        postList: state.postList.filter(
+          post => post._id === action.payload.deletedPostId ? null : true
+        ),
+      };
+    }
     default: {
       return state;
     }
