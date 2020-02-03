@@ -14,7 +14,7 @@ import SignUpContainer from '../components/SignUp';
 import ErrorsContainer from '../components/Errors';
 import UserContainer from '../components/User';
 import NotFound from '../components/NotFound';
-import CreatePostContainer from '../components/Posts';
+import { CreatePostContainer, PostPageContainer } from '../components/Posts';
 
 export default (
   <BrowserRouter>
@@ -23,6 +23,7 @@ export default (
     <Switch>
       <Route exact path="/" component={HomeContainer} />
       <Route exact path="/user/:username" component={UserContainer} />
+      <Route exact path="/post/:postId" component={PostPageContainer} />
       <Route exact path="/signin" component={SignInContainer} />
       <Route exact path="/signup" component={SignUpContainer} />
       <Route exact path="/createpost" component={CreatePostContainer} />

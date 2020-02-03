@@ -1,12 +1,22 @@
 import { POST_ACTIONS } from '../actionCreators';
 
-const initialState = {};
+const initialState = {
+  post: {},
+  createdPost: {}
+};
 
-export default function UserReducer(state = initialState, action) {
+export default function PostReducer(state = initialState, action) {
   switch (action.type) {
+    case POST_ACTIONS.GET_POST: {
+      return {
+        ...state,
+        post: action.payload
+      };
+    }
     case POST_ACTIONS.CREATE_POST: {
       return {
-        post: action.payload
+        ...state,
+        createdPost: action.payload
       };
     }
     default: {
