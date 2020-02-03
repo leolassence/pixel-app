@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { PostContainer } from '../Posts';
 
 class Profile extends Component {
   componentDidMount() {
@@ -10,9 +11,13 @@ class Profile extends Component {
       history
     } = this.props;
 
+    const query = { username };
+    const options = { limit: 5 };
+
     if (!username) history.push('/notfound');
 
     this.props.getUser({ username });
+    this.props.getPosts(query, options);
   }
 
   renderUser() {
@@ -28,6 +33,14 @@ class Profile extends Component {
     }
 
     return null;
+  }
+
+  renderPosts = () => {
+    if (this.props.postList) {
+      return this.props.postList.map(post => <PostContainer key={post._id} post={post} />);
+    }
+
+    return (<h1>Loading ...</h1>);
   }
 
   renderContentWhenLoggedIn() {
@@ -52,16 +65,11 @@ class Profile extends Component {
           {this.renderUser()}
           {this.renderContentWhenLoggedIn()}
         </div>
+        {this.renderPosts()}
       </main>
     );
   }
 }
-
-Profile.defaultProps = {
-  user: {
-    username: ''
-  }
-};
 
 Profile.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
@@ -76,8 +84,18 @@ Profile.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string,
     email: PropTypes.string,
-  }),
-  getUser: PropTypes.func.isRequired
+  }).isRequired,
+  getUser: PropTypes.func.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  postList: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    coverImag: PropTypes.string,
+  })).isRequired,
 };
 
 export default Profile;

@@ -9,6 +9,7 @@ const Post = ({ post }) => {
   return (
     <main className="container" style={{ marginTop: '20px' }}>
       <div className="jumbotron post">
+        <span>{post.username}</span>
         <h1>{post.title}</h1>
         <p>{post.location}</p>
         <p>{post.description}</p>
@@ -20,6 +21,7 @@ const Post = ({ post }) => {
 
 Post.propTypes = {
   post: PropTypes.shape({
+    username: PropTypes.string,
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,

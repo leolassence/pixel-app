@@ -20,7 +20,8 @@ import {
 import {
   POST_ACTIONS,
   createPost,
-  getPost
+  getPost,
+  getPosts
 } from './posts';
 
 export {
@@ -36,5 +37,6 @@ export {
   getUser,
   POST_ACTIONS,
   createPost,
-  getPost
+  getPost,
+  getPosts
 };

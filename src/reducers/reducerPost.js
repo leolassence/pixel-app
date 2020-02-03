@@ -2,11 +2,18 @@ import { POST_ACTIONS } from '../actionCreators';
 
 const initialState = {
   post: {},
-  createdPost: {}
+  createdPost: {},
+  postList: []
 };
 
 export default function PostReducer(state = initialState, action) {
   switch (action.type) {
+    case POST_ACTIONS.GET_POSTS: {
+      return {
+        ...state,
+        postList: action.payload
+      };
+    }
     case POST_ACTIONS.GET_POST: {
       return {
         ...state,
