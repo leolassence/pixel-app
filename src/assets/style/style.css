@@ -56,3 +56,7 @@ body {
 .form span {
   color: #e74c3c;
 }
+
+.post img {
+  width: 100%;
+}

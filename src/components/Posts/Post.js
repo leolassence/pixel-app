@@ -8,7 +8,7 @@ const Post = ({ post }) => {
 
   return (
     <main className="container" style={{ marginTop: '20px' }}>
-      <div className="jumbotron">
+      <div className="jumbotron post">
         <h1>{post.title}</h1>
         <p>{post.location}</p>
         <p>{post.description}</p>
