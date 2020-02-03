@@ -10,7 +10,7 @@ const USER_ACTIONS = {
 function getUser({ username }) {
   return async dispatch => {
     try {
-      const response = await axios.get(`${API_ENDPOINT}/user`, {
+      const response = await axios.get(`${API_ENDPOINT}/users`, {
         params: { username }
       });
 

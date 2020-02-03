@@ -18,7 +18,7 @@ function setAuthentification(isLoggedIn) {
 function signInUser({ signInId, password }, history) {
   return async dispatch => {
     try {
-      const response = await axios.post(`${API_ENDPOINT}/signIn`, {
+      const response = await axios.post(`${API_ENDPOINT}/auth/signIn`, {
         signInId,
         password
       });
@@ -39,7 +39,7 @@ function signInUser({ signInId, password }, history) {
 function signUpUser({ email, username, password }, history) {
   return async dispatch => {
     try {
-      const response = await axios.post(`${API_ENDPOINT}/signUp`, {
+      const response = await axios.post(`${API_ENDPOINT}/auth/signUp`, {
         email,
         username,
         password,
