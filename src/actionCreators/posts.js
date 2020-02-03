@@ -5,15 +5,33 @@ import { parseError } from './errors';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const POST_ACTIONS = {
   GET_POST: 'GET_POST',
-  CREATE_POST: 'CREATE_POST'
+  CREATE_POST: 'CREATE_POST',
+  GET_POSTS: 'GET_POSTS'
 };
+
+function getPosts(query, options) {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`${API_ENDPOINT}/posts`, {
+        params: { query, options }
+      });
+
+      return dispatch({
+        type: POST_ACTIONS.GET_POSTS,
+        payload: data
+      });
+    } catch (error) {
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
+    }
+  };
+}
+
 
 function getPost(postId) {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_ENDPOINT}/posts`, {
-        params: { postId }
-      });
+      const { data } = await axios.get(`${API_ENDPOINT}/posts/${postId}`);
 
       if (!data) return dispatch(parseError('Internal server Error'));
 
@@ -73,5 +91,6 @@ function createPost({ formData, data }, history) {
 export {
   POST_ACTIONS,
   createPost,
-  getPost
+  getPost,
+  getPosts
 };

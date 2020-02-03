@@ -15,19 +15,23 @@ class PostPage extends Component {
     getPost(postId);
   }
 
+  renderPost = () => {
+    if (this.props.post) {
+      return <PostContainer post={this.props.post} />;
+    }
+
+    return (<h1>Loading ...</h1>);
+  }
+
   render() {
     return (
       <div className="container">
         <h1>This is the post page</h1>
-        <PostContainer />
+        {this.renderPost()}
       </div>
     );
   }
 }
-
-PostPage.defaultProps = {
-  post: {}
-};
 
 PostPage.propTypes = {
   // isLoggedIn: PropTypes.bool.isRequired,
@@ -39,8 +43,8 @@ PostPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  post: PropTypes.shape({}),
-  getPost: PropTypes.func.isRequired
+  getPost: PropTypes.func.isRequired,
+  post: PropTypes.shape({}).isRequired,
 };
 
 
