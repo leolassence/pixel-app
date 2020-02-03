@@ -8,11 +8,7 @@ const schema = Yup.object().shape({
     .min(3)
     .required('Required field'),
   description: Yup.string()
-    .min(3)
-    .required('Required field'),
-  coverImage: Yup.string()
-    .min(3)
-    .required('Required field'),
+    .required('Required field')
 });
 
 export default schema;

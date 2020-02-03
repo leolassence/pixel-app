@@ -4,12 +4,25 @@ import { Form, Input } from '@rocketseat/unform';
 import schema from './schema';
 
 class CreatePost extends Component {
-  handleSubmit = data => this.props.createPost(data, this.props.history);
+  constructor(props) {
+    super(props);
+    this.state = { coverImage: '' };
+  }
+
+  handleSubmit = data => {
+    const formData = new FormData();
+    formData.append('coverImage', this.state.coverImage);
+
+    this.props.createPost({
+      data,
+      formData
+    }, this.props.history);
+  }
 
   render() {
     return (
       <div className="text-center signin-page">
-        <Form schema={schema} onSubmit={this.handleSubmit} className="form">
+        <Form schema={schema} onSubmit={this.handleSubmit} className="form" encType="multipart/form-data">
           <h1 className="h3 mb-3 font-weight-normal">Create Post</h1>
           <div className="field">
             <Input
@@ -36,11 +49,12 @@ class CreatePost extends Component {
             />
           </div>
           <div className="field">
-            <Input
+            <input
               name="coverImage"
-              type="text"
-              placeholder="Cover Image"
+              type="file"
               className="form-control"
+              accept=".png, .jpg, .jpeg"
+              onChange={e => this.setState({ coverImage: e.target.files[0] })}
             />
           </div>
 

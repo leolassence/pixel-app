@@ -12,6 +12,7 @@ const Post = ({ post }) => {
         <h1>{post.title}</h1>
         <p>{post.location}</p>
         <p>{post.description}</p>
+        <img src={post.coverImage} alt={post.title} />
       </div>
     </main>
   );
@@ -22,6 +23,7 @@ Post.propTypes = {
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,
+    coverImage: PropTypes.string,
   }).isRequired,
 };
 

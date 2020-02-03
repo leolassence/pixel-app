@@ -28,15 +28,30 @@ function getPost(postId) {
   };
 }
 
-function createPost(post, history) {
+function createPost({ formData, data }, history) {
   return async dispatch => {
     try {
-      const { data: { postId } } = await axios({
+      const requestConfig = {
         method: 'post',
-        url: `${API_ENDPOINT}/post/create`,
-        data: post,
         headers: {
           authorization: localStorage.getItem('token')
+        },
+      };
+
+      const { data: { imageId } } = await axios({
+        ...requestConfig,
+        url: `${API_ENDPOINT}/upload/image`,
+        data: formData,
+      });
+
+      if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
+
+      const { data: { postId } } = await axios({
+        ...requestConfig,
+        url: `${API_ENDPOINT}/post/create`,
+        data: {
+          ...data,
+          imageId
         }
       });
 
