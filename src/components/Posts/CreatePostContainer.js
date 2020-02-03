@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { createPost } from '../../actionCreators';
+import { createPost } from '../../actions';
 import CreatePost from './CreatePost';
 
 const mapStateToProps = state => ({

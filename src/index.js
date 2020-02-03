@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import routes from './routes';
 import reducers from './reducers';
-import { setAuthentification } from './actionCreators';
+import { setAuthentification } from './actions';
 
 const invariant = require('redux-immutable-state-invariant').default();
 

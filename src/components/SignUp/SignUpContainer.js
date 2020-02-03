@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { signUpUser } from '../../actionCreators';
+import { signUpUser } from '../../actions';
 import SignUp from './SignUp';
 
 const mapDispatchToProps = dispatch => ({
