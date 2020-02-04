@@ -25,10 +25,9 @@ class PostPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h1>This is the post page</h1>
+      <main className="container" style={{ marginTop: '20px' }}>
         {this.renderPost()}
-      </div>
+      </main>
     );
   }
 }

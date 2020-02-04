@@ -14,7 +14,7 @@ import SignUpContainer from '../components/SignUp';
 import ErrorsContainer from '../components/Errors';
 import UserContainer from '../components/User';
 import NotFound from '../components/NotFound';
-import { CreatePostContainer, PostPageContainer } from '../components/Posts';
+import { CreatePostContainer, PostPageContainer, UpdatePostContainer } from '../components/Posts';
 
 export default (
   <BrowserRouter>
@@ -27,6 +27,7 @@ export default (
       <Route exact path="/signin" component={SignInContainer} />
       <Route exact path="/signup" component={SignUpContainer} />
       <Route exact path="/createpost" component={CreatePostContainer} />
+      <Route exact path="/updatepost/:postId" component={UpdatePostContainer} />
       <Route path="/notfound" component={NotFound} />
       <Redirect from="*" to="/notfound" />
     </Switch>

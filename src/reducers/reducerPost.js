@@ -3,6 +3,7 @@ import { POST_ACTIONS } from '../actions';
 const initialState = {
   post: {},
   createdPost: {},
+  updatedPost: {},
   postList: []
 };
 
@@ -24,6 +25,12 @@ export default function PostReducer(state = initialState, action) {
       return {
         ...state,
         createdPost: action.payload
+      };
+    }
+    case POST_ACTIONS.UPDATE_POST: {
+      return {
+        ...state,
+        updatedPost: action.payload
       };
     }
     case POST_ACTIONS.DELETE_POST: {
