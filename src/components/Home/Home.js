@@ -21,9 +21,6 @@ class Home extends Component {
   render() {
     return (
       <main className="container" style={{ marginTop: '20px' }}>
-        <div className="jumbotron">
-          <h1>Welcome on Pixel</h1>
-        </div>
         {this.renderPosts()}
       </main>
     );
