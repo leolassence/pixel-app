@@ -29,7 +29,6 @@ function getPosts(query, options) {
   };
 }
 
-
 function getPost(postId) {
   return async dispatch => {
     try {
@@ -90,8 +89,6 @@ function createPost({ formData, data }, history) {
   };
 }
 
-
-
 function updatePost({ postId, formData, data }, history) {
   return async dispatch => {
     try {
@@ -135,18 +132,25 @@ function updatePost({ postId, formData, data }, history) {
   };
 }
 
-
-function deletePost(postId) {
+function deletePost(postId, history) {
   return async dispatch => {
     try {
-      const { data } = await axios.delete(`${API_ENDPOINT}/posts/${postId}`);
+      const { data } = await axios({
+        method: 'delete',
+        headers: {
+          authorization: localStorage.getItem('token')
+        },
+        url: `${API_ENDPOINT}/posts/${postId}`
+      });
 
       if (!data) return dispatch(parseError('Internal server Error'));
 
-      return dispatch({
+      dispatch({
         type: POST_ACTIONS.DELETE_POST,
         payload: data
       });
+
+      return history.push('/');
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));
       return dispatch(parseError(error.response.data.message));

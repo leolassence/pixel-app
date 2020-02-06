@@ -10,7 +10,13 @@ function isCurrentUserPost(props) {
   return false;
 }
 
+function redirectPathResolver(location) {
+  const { from } = location.state || { from: { pathname: '/' } };
+
+  return from;
+}
 
 module.exports = {
-  isCurrentUserPost
+  isCurrentUserPost,
+  redirectPathResolver
 };

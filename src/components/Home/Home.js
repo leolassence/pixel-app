@@ -12,7 +12,13 @@ class Home extends Component {
 
   renderPosts = () => {
     if (this.props.postList) {
-      return this.props.postList.map(post => <PostContainer key={post._id} post={post} />);
+      return this.props.postList.map(post => (
+        <PostContainer
+          key={post._id}
+          post={post}
+          history={this.props.history}
+        />
+      ));
     }
 
     return (<h1>Loading ...</h1>);
@@ -29,6 +35,7 @@ class Home extends Component {
 
 Home.propTypes = {
   // isLoggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.shape({}).isRequired,
   getPosts: PropTypes.func.isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string.isRequired,

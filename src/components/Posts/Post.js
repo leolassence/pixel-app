@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import { isCurrentUserPost } from '../../helpers';
 
 class Post extends Component {
-  handleClickDeletePost = () => this.props.deletePost(this.props.post._id);
+  handleClickDeletePost = () => this.props.deletePost(this.props.post._id, this.props.history);
 
   renderCurrentUserActions = () => {
-    const { post } = this.props;
+    const { post, isLoggedIn } = this.props;
 
-    if (isCurrentUserPost(this.props)) {
+    if (isLoggedIn && isCurrentUserPost(this.props)) {
       const windowMessage = 'Are you sure you wish to delete this post ?';
 
       return (
@@ -60,6 +60,7 @@ class Post extends Component {
 
 Post.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.shape({}).isRequired,
   post: PropTypes.shape({
     _id: PropTypes.string,
     username: PropTypes.string,

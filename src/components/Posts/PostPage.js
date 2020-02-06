@@ -8,7 +8,6 @@ class PostPage extends Component {
       match: {
         params: { postId }
       },
-      // isLoggedIn,
       getPost
     } = this.props;
 
@@ -17,7 +16,12 @@ class PostPage extends Component {
 
   renderPost = () => {
     if (this.props.post) {
-      return <PostContainer post={this.props.post} />;
+      return (
+        <PostContainer
+          post={this.props.post}
+          history={this.props.history}
+        />
+      );
     }
 
     return (<h1>Loading ...</h1>);
