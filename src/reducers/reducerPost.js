@@ -49,7 +49,8 @@ export default function PostReducer(state = initialState, action) {
 
       return {
         ...state,
-        postList: state.postList.map(post => [updatedPost].find(i => post._id === i._id) || post)
+        postList: state.postList.map(post => [updatedPost].find(i => post._id === i._id) || post),
+        post: state.post._id === updatedPost._id ? updatedPost : state.post,
       };
     }
     default: {

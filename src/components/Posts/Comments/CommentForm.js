@@ -4,11 +4,26 @@ import { Form, Input } from '@rocketseat/unform';
 import schema from './schema';
 
 class CommentForm extends Component {
-  handleSubmit = data => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: ''
+    };
+  }
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit = () => {
     this.props.createComment({
-      message: data.message,
+      message: this.state.message,
       postId: this.props.postId,
     });
+
+    this.setState({ message: '' });
   }
 
   render() {
@@ -19,6 +34,8 @@ class CommentForm extends Component {
             <Input
               name="message"
               type="text"
+              value={this.state.message}
+              onChange={e => this.handleChange(e)}
               placeholder="Comment"
               className="form-control"
             />

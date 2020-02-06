@@ -10,7 +10,6 @@ const COMMENT_ACTIONS = {
 function createComment({ message, postId }) {
   return async dispatch => {
     try {
-      // check res result
       const { data } = await axios({
         method: 'post',
         headers: {
@@ -19,7 +18,6 @@ function createComment({ message, postId }) {
         url: `${API_ENDPOINT}/posts/comment/${postId}`,
         data: { message }
       });
-      console.log('RES', data)
 
       if (!data.updatedPost) return dispatch(parseError('Internal server Error'));
 
