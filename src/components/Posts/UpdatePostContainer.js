@@ -6,7 +6,7 @@ import UpdatePost from './UpdatePost';
 
 const mapStateToProps = state => ({
   isLoggedIn: state.authentification.isLoggedIn,
-  post: state.posts.post
+  post: state.posts.post,
 });
 
 const mapDispatchToProps = dispatch => ({

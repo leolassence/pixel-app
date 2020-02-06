@@ -37,38 +37,44 @@ class Profile extends Component {
 
   renderPosts = () => {
     if (this.props.postList) {
-      return this.props.postList.map(post => <PostContainer key={post._id} post={post} />);
-    }
-
-    return (<h1>Loading ...</h1>);
+      return this.props.postList.map(post => (
+        <PostContainer
+          key={post._id}
+          post={post}
+          history={this.props.history}
+        />
+    ));
   }
 
-  renderContentWhenLoggedIn() {
-    if (this.props.isLoggedIn) {
-      return (
-        <p>
-          This is my profile
-        </p>
-      );
-    }
+  return (<h1>Loading ...</h1>);
+}
 
+renderContentWhenLoggedIn() {
+  if (this.props.isLoggedIn) {
     return (
-      <p>This is the profile of someone</p>
+      <p>
+        This is my profile
+      </p>
     );
   }
 
-  render() {
-    return (
-      <main className="container" style={{ marginTop: '20px' }}>
-        <div className="jumbotron">
-          <h1>Profile page</h1>
-          {this.renderUser()}
-          {this.renderContentWhenLoggedIn()}
-        </div>
-        {this.renderPosts()}
-      </main>
-    );
-  }
+  return (
+    <p>This is the profile of someone</p>
+  );
+}
+
+render() {
+  return (
+    <main className="container" style={{ marginTop: '20px' }}>
+      <div className="jumbotron">
+        <h1>Profile page</h1>
+        {this.renderUser()}
+        {this.renderContentWhenLoggedIn()}
+      </div>
+      {this.renderPosts()}
+    </main>
+  );
+}
 }
 
 Profile.propTypes = {
