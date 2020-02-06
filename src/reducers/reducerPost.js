@@ -1,4 +1,7 @@
-import { POST_ACTIONS } from '../actions';
+import {
+  POST_ACTIONS,
+  COMMENT_ACTIONS,
+} from '../actions';
 
 const initialState = {
   post: {},
@@ -39,6 +42,14 @@ export default function PostReducer(state = initialState, action) {
         postList: state.postList.filter(
           post => post._id === action.payload.deletedPostId ? null : true
         ),
+      };
+    }
+    case COMMENT_ACTIONS.CREATE_COMMENT: {
+      const { updatedPost } = action.payload;
+
+      return {
+        ...state,
+        postList: state.postList.map(post => [updatedPost].find(i => post._id === i._id) || post)
       };
     }
     default: {

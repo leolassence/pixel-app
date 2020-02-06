@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { isCurrentUserPost } from '../../helpers';
+import { CommentFormContainer } from './Comments';
 
 class Post extends Component {
   handleClickDeletePost = () => this.props.deletePost(this.props.post._id, this.props.history);
@@ -30,6 +31,14 @@ class Post extends Component {
     return null;
   }
 
+  renderCommentForm = () => {
+    if (this.props.isLoggedIn) {
+      return <CommentFormContainer postId={this.props.post._id} />;
+    }
+
+    return null;
+  }
+
   render() {
     const { post } = this.props;
 
@@ -52,6 +61,7 @@ class Post extends Component {
           </li>
           <li className="list-group-item">{post.location}</li>
         </ul>
+        {this.renderCommentForm()}
         {this.renderCurrentUserActions()}
       </div>
     );

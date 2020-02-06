@@ -26,6 +26,12 @@ import {
   updatePost,
 } from './posts';
 
+
+import {
+  COMMENT_ACTIONS,
+  createComment,
+} from './comments';
+
 export {
   ERROR_ACTIONS,
   parseError,
@@ -43,4 +49,6 @@ export {
   getPost,
   getPosts,
   deletePost,
+  COMMENT_ACTIONS,
+  createComment,
 };
