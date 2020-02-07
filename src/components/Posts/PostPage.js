@@ -15,7 +15,7 @@ class PostPage extends Component {
   }
 
   renderPost = () => {
-    if (this.props.post) {
+    if (Object.entries(this.props.post).length !== 0) {
       return (
         <PostContainer
           post={this.props.post}
