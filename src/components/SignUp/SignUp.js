@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
+import { Link } from 'react-router-dom';
 import schema from './schema';
+import phone from '../../assets/images/phone.png';
+import logo from '../../assets/images/logo.png';
+import ios from '../../assets/images/ios.png';
+import android from '../../assets/images/android.png';
 
 
 class SignUp extends Component {
@@ -13,51 +18,143 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="text-center signin-page">
-        <Form schema={schema} onSubmit={this.handleSubmit} className="form">
-          <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
-          <div className="field">
-            <Input
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="form-control"
+      <main className="login">
+        <div className="login__column">
+          <img
+            src={phone}
+            alt="Phone"
+            title="Phone"
+            className="login__phone-image"
+          />
+        </div>
+        <section className="login__column">
+          <div className="login__section login__sign-in">
+            <img
+              src={logo}
+              alt="Logo"
+              title="Logo"
+              className="login__logo"
             />
+            <p className="text-for-member">Sign up to see photos and videos from your friends.</p>
+            <Form schema={schema} onSubmit={this.handleSubmit} className="login__form">
+              <div className="login__input-container">
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  className="login__input"
+                />
+              </div>
+              <div className="login__input-container">
+                <Input
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  className="login__input"
+                />
+              </div>
+              <div className="login__input-container">
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  className="login__input"
+                />
+              </div>
+              <div className="login__input-container">
+                <Input
+                  name="repeatPassword"
+                  type="password"
+                  placeholder="Repeat Password"
+                  className="login__input"
+                />
+              </div>
+              <div className="login__input-container">
+                <input
+                  type="submit"
+                  value="Sign up"
+                  className="login__input login__input--btn"
+                />
+              </div>
+            </Form>
+            <br />
           </div>
-          <div className="field">
-            <Input
-              name="username"
-              type="text"
-              placeholder="Username"
-              className="form-control"
-            />
+          <div className="login__section login__sign-up">
+            <span className="login__text">
+              Already have an account ?&nbsp;
+              <Link to="/signin" className="login__link">
+                Sign In
+              </Link>
+            </span>
           </div>
-          <div className="field">
-            <Input
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="form-control"
-            />
+          <div className="login__section login__section--transparent login__app">
+            <span className="login__text">
+              Get the app.
+            </span>
+            <div className="login__appstores">
+              <img
+                src={ios}
+                alt="iOS"
+                title="Get the app!"
+                className="login__appstore"
+              />
+              <img
+                src={android}
+                alt="Android"
+                title="Get the app!"
+                className="login__appstore"
+              />
+            </div>
           </div>
-          <div className="field">
-            <Input
-              name="repeatPassword"
-              type="password"
-              placeholder="Repeat Password"
-              className="form-control"
-            />
-          </div>
-          <div className="buttons">
-            <button className="btn btn-lg btn-primary btn-block" type="submit">
-              Submit
-            </button>
-          </div>
-        </Form>
-      </div>
+        </section>
+      </main>
     );
   }
 }
+// <div className="text-center signin-page">
+//   <Form schema={schema} onSubmit={this.handleSubmit} className="form">
+//     <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
+//     <div className="field">
+//       <Input
+//         name="email"
+//         type="email"
+//         placeholder="Email"
+//         className="form-control"
+//       />
+//     </div>
+//     <div className="field">
+//       <Input
+//         name="username"
+//         type="text"
+//         placeholder="Username"
+//         className="form-control"
+//       />
+//     </div>
+//     <div className="field">
+//       <Input
+//         name="password"
+//         type="password"
+//         placeholder="Password"
+//         className="form-control"
+//       />
+//     </div>
+//     <div className="field">
+//       <Input
+//         name="repeatPassword"
+//         type="password"
+//         placeholder="Repeat Password"
+//         className="form-control"
+//       />
+//     </div>
+//     <div className="buttons">
+//       <button className="btn btn-lg btn-primary btn-block" type="submit">
+//         Submit
+//       </button>
+//     </div>
+//   </Form>
+// </div>
+//
+//
 
 SignUp.propTypes = {
   history: PropTypes.shape({}),

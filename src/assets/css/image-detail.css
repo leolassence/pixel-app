@@ -1,0 +1,102 @@
+
+.feed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image{
+    width:60%;
+    background-color: white;
+    border-radius: 5px;
+    border:1px solid rgba(0,0,0,.0975);
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.image__header{
+    padding:15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom:1px solid rgba(0,0,0,.0975);
+}
+
+.image__avatar{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right:15px;
+}
+
+.image__username{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.image__file{
+    max-width: 100%;
+}
+
+.image__info{
+    padding:20px 20px 0 20px;
+}
+
+.image__icons{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.image__icon:first-child{
+    /*margin-right:10px;*/
+}
+
+.image__likes{
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.image__comment{
+    margin-bottom: 10px;
+}
+
+.image__comment-author{
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.image__time-ago{
+    color:#999;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding-bottom: 10px;
+    display: block;
+    border-bottom:1px solid rgba(0,0,0,.0975);
+}
+
+.image__add-comment-container{
+    position: relative;
+}
+
+.image__add-comment-container i{
+    position: absolute;
+    top:17px;
+    right:0;
+}
+
+.image__add-comment{
+    width: 97%;
+    border:0;
+    resize: none;
+    font-size: 14px;
+    padding-top:15px;
+}
+
+.image__add-comment:focus{
+    outline: none;
+}
+
+.heart-red{
+    color:red;
+}

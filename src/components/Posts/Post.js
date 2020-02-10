@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { isCurrentUserPost } from '../../helpers';
 import { CommentFormContainer, Comment } from './Comments';
+import userImg from '../../assets/images/user.png';
 
 class Post extends Component {
   handleClickDeletePost = () => this.props.deletePost(this.props.post._id, this.props.history);
@@ -15,16 +16,20 @@ class Post extends Component {
       const windowMessage = 'Are you sure you wish to delete this post ?';
 
       return (
-        <div className="card-body">
-          <Link to={`/updatepost/${post._id}`} type="button" className="btn btn-primary">Edit</Link>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => { if (window.confirm(windowMessage)) this.handleClickDeletePost(); }}
-          >
-            Delete
-          </button>
-        </div>
+        <>
+          <Link to={`/updatepost/${post._id}`}>
+            <span className="photo__icon">
+              <i className="far fa-edit" />
+              &nbsp;
+            </span>
+          </Link>
+          <a href="#" onClick={() => { if (window.confirm(windowMessage)) this.handleClickDeletePost(); }}>
+            <span className="photo__icon">
+              <i className="far fa-trash-alt" />
+              &nbsp;
+            </span>
+          </a>
+        </>
       );
     }
 
@@ -58,29 +63,81 @@ class Post extends Component {
     }
 
     return (
-      <div className="post card col-md-6 offset-3">
-        <Link to={`/post/${post._id}`}>
-          <img src={post.coverImage} className="card-img-top" alt={post.title} />
-        </Link>
-        <div className="card-body">
-          <h5 className="card-title">{post.title}</h5>
-          <p className="card-text">{post.description}</p>
+      <section className="photo">
+        <header className="photo__header">
+          <div className="photo__header-column">
+            <img
+              className="photo__avatar"
+              src={userImg}
+              alt={post.username}
+            />
+          </div>
+          <div className="photo__header-column">
+            <span className="photo__username">{post.username}</span>
+            <span className="photo__location">{post.location}</span>
+          </div>
+        </header>
+
+        <div className="photo__file-container">
+          <Link to={`/post/${post._id}`}>
+            <img className="photo__file" src={post.coverImage} alt={post.title} />
+          </Link>
         </div>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <Link to={`/user/${post.username}`}>{post.username}</Link>
-          </li>
-          <li className="list-group-item">{post.location}</li>
-          <li className="list-group-item">
+        <div className="photo__info">
+          <div className="photo__icons">
+            <span className="photo__icon">
+              <i className="fas fa-heart heart" />
+              &nbsp;
+            </span>
+            <span className="photo__icon">
+              <i className="far fa-comment-dots" />
+              &nbsp;
+            </span>
+            <span className="photo__icon">
+              <i className="far fa-bookmark" />
+              &nbsp;
+            </span>
+            {this.renderCurrentUserActions()}
+          </div>
+          <span className="photo__likes">35 likes</span>
+          <ul className="photo__comments">
+            <li className="photo__comment">
+              <span className="photo__comment-author">{post.username}</span>
+              {post.description}
+            </li>
+          </ul>
+          <ul className="photo__comments">
             {this.renderComments()}
-          </li>
-        </ul>
-        {this.renderCommentForm()}
-        {this.renderCurrentUserActions()}
-      </div>
+          </ul>
+          <span className="photo__time-ago">10 hours ago</span>
+          {this.renderCommentForm()}
+        </div>
+      </section>
     );
   }
 }
+
+// <div className="post card col-md-6 offset-3">
+//   <Link to={`/post/${post._id}`}>
+//     <img src={post.coverImage} className="card-img-top" alt={post.title} />
+//   </Link>
+//   <div className="card-body">
+//     <h5 className="card-title">{post.title}</h5>
+//     <p className="card-text">{post.description}</p>
+//   </div>
+//   <ul className="list-group list-group-flush">
+//     <li className="list-group-item">
+//       <Link to={`/user/${post.username}`}>{post.username}</Link>
+//     </li>
+//     <li className="list-group-item">{post.location}</li>
+//     <li className="list-group-item">
+//       {this.renderComments()}
+//     </li>
+//   </ul>
+//   {this.renderCommentForm()}
+//   {this.renderCurrentUserActions()}
+// </div>
+
 
 Post.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,

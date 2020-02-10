@@ -28,23 +28,17 @@ class CommentForm extends Component {
 
   render() {
     return (
-      <div className="text-center signin-page">
+      <div className="photo__add-comment-container">
         <Form schema={schema} onSubmit={this.handleSubmit} className="form">
-          <div className="field">
-            <Input
-              name="message"
-              type="text"
-              value={this.state.message}
-              onChange={e => this.handleChange(e)}
-              placeholder="Comment"
-              className="form-control"
-            />
-          </div>
-          <div className="buttons">
-            <button className="btn btn-lg btn-primary btn-block" type="submit">
-              Submit
-            </button>
-          </div>
+          <Input
+            name="message"
+            type="text"
+            value={this.state.message}
+            onChange={e => this.handleChange(e)}
+            placeholder="Add a comment..."
+            className="photo__add-comment"
+          />
+          <i className="fas fa-location-arrow" />
         </Form>
       </div>
     );

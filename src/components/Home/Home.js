@@ -26,7 +26,7 @@ class Home extends Component {
 
   render() {
     return (
-      <main className="container" style={{ marginTop: '20px' }}>
+      <main className="feed">
         {this.renderPosts()}
       </main>
     );
