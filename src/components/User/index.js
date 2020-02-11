@@ -1,3 +1,7 @@
 import UserContainer from './UserContainer';
+import EditProfileContainer from './EditProfileContainer';
 
-export default UserContainer;
+export {
+  UserContainer,
+  EditProfileContainer,
+};

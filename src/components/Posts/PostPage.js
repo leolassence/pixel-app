@@ -29,7 +29,7 @@ class PostPage extends Component {
 
   render() {
     return (
-      <main className="container" style={{ marginTop: '20px' }}>
+      <main className="feed">
         {this.renderPost()}
       </main>
     );

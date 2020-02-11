@@ -11,7 +11,7 @@ class Errors extends Component {
   render() {
     return (
       this.props.error && (
-        <div className="alert alert-danger" role="alert">
+        <div className="col-md-4 offset-4 alert alert-danger" role="alert">
           {this.props.error}
         </div>
       )

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PostContainer } from '../Posts';
+import { Link } from 'react-router-dom';
+import ProfilePost from './ProfilePost';
+import userImg from '../../assets/images/user.png';
 
 class Profile extends Component {
   componentDidMount() {
@@ -38,7 +40,7 @@ class Profile extends Component {
   renderPosts = () => {
     if (this.props.postList) {
       return this.props.postList.map(post => (
-        <PostContainer
+        <ProfilePost
           key={post._id}
           post={post}
           history={this.props.history}
@@ -49,36 +51,60 @@ class Profile extends Component {
   return (<h1>Loading ...</h1>);
 }
 
-renderContentWhenLoggedIn() {
-  if (this.props.isLoggedIn) {
-    return (
-      <p>
-        This is my profile
-      </p>
-    );
-  }
-
-  return (
-    <p>This is the profile of someone</p>
-  );
-}
-
 render() {
   return (
-    <main className="container" style={{ marginTop: '20px' }}>
-      <div className="jumbotron">
-        <h1>Profile page</h1>
-        {this.renderUser()}
-        {this.renderContentWhenLoggedIn()}
-      </div>
-      {this.renderPosts()}
+    <main className="profile-container">
+      <section className="profile">
+        <header className="profile__header">
+          <div className="profile__avatar-container">
+            <img
+              src={userImg}
+              className="profile__avatar"
+              alt="user img"
+            />
+          </div>
+          <div className="profile__info">
+            <div className="profile__name">
+              <h1 className="profile__title">Rich_Geek</h1>
+              <Link to={`/user/edit/${this.props.user.username}`} className="profile__button u-fat-text">Edit profile</Link>
+            </div>
+            <ul className="profile__numbers">
+              <li className="profile__posts">
+                <span className="profile__number u-fat-text">10</span>
+                posts
+              </li>
+              <li className="profile__followers">
+                <span className="profile__number u-fat-text">40</span>
+                followers
+              </li>
+              <li className="profile__following">
+                <span className="profile__number u-fat-text">134</span>
+                following
+              </li>
+            </ul>
+            <div className="profile__bio">
+              <span className="profile__full-name u-fat-text">Loyd RG Tafireyi</span>
+              <br />
+              <br />
+              <p className="profile__full-bio">Ut enim ad minim veniam, quis nostrud exercition ni.</p>
+              <br />
+              <br />
+            </div>
+          </div>
+        </header>
+        <div className="tab-content">
+          <div className="profile__pictures active" id="images" data-tab-content>
+            {this.renderPosts()}
+          </div>
+        </div>
+      </section>
     </main>
-  );
-}
+    );
+  }
 }
 
 Profile.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  // isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired

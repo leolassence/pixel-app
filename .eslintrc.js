@@ -13,6 +13,7 @@ module.exports = {
     "browser": true
   },
   "rules": {
+    "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "implicit-arrow-linebreak": "off",
     "comma-dangle": "off",
@@ -25,6 +26,7 @@ module.exports = {
     "no-unused-expressions": "off",
     "react/jsx-props-no-spreading": "off",
     "no-underscore-dangle": "off",
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "click-events-have-key-events": "off"
   }
 }

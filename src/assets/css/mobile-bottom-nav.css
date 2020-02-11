@@ -1,0 +1,48 @@
+@media only screen
+and (min-width: 320px)
+and (max-width: 650px) {
+  /* Globals */
+  body{
+    padding-top: calc(80px);
+    font-size: 14px;
+  }
+
+  .navigation-mobile{
+    background-color:white;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top:0;
+    border-bottom:1px solid rgba(0,0,0,.0975);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0px 50px;
+    box-sizing: border-box;
+    z-index:2;
+  }
+
+  .bottom-navigation{
+    position: fixed;
+    background-color:white;
+    height: 80px;
+    width: 100%;
+    bottom:0;
+    border-top:1px solid rgba(0,0,0,.0975);
+    border-bottom:1px solid rgba(0,0,0,.0975);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:5%;
+    box-sizing: border-box;
+    z-index:2;
+  }
+
+  .mobile-nav{
+    margin-left: 10px;
+    margin-right: 10px;
+    color: rgba(0,0,0,.5);
+    text-decoration: none;
+    font-size:22px;
+  }
+}
