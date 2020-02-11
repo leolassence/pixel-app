@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostForm from './PostForm';
+import PostForm from '../PostForm';
 
 class CreatePost extends Component {
   componentDidMount() {

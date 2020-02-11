@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PostContainer } from '../Posts';
+import PostContainer from '../Posts';
 
 class Home extends Component {
   componentDidMount() {

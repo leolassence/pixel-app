@@ -8,19 +8,14 @@ class Header extends Component {
   renderAuthenticateLink = () => {
     if (this.props.isLoggedIn) {
       return [
-        <Link key={1} to="/" href="explore.html" className="navigation__link">
-          <i className="fa fa-compass" />
-        </Link>,
-        <Link key={2} to="/" href="notifications.html" className="navigation__link notif ">
-          <i className="fa fa-heart" />
-        </Link>,
-        <Link key={3} to="/createpost" className="navigation__link">
+        <Link key={3} to="/createpost" className="navigation__link" title="Create Post">
           <i className="fa fa-plus" />
         </Link>,
         <Link
           key={4}
           to={`/user/${localStorage.getItem('username')}`}
           className="navigation__link"
+          title="Profile"
         >
           <i className="fa fa-user" />
         </Link>,
@@ -29,6 +24,7 @@ class Header extends Component {
           to="/"
           className="navigation__link"
           type="button"
+          title="Sign Out"
           onClick={() => this.props.signOutUser()}
         >
           <i className="fa fa-sign-out" />
@@ -36,7 +32,7 @@ class Header extends Component {
       ];
     }
     return (
-      <Link to="/signin" className="navigation__link">
+      <Link to="/signin" className="navigation__link" title="Sign In">
         <i className="fa fa-sign-in" />
       </Link>
     );
@@ -45,7 +41,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="navigation">
-        <Link to="/">
+        <Link to="/" title="Home">
           <img
             src={imgLogo}
             alt="logo"

@@ -1,5 +1,4 @@
 import {
-  AUTH_ACTIONS,
   setAuthentification,
   signInUser,
   signUpUser,
@@ -7,18 +6,15 @@ import {
 } from './authentification';
 
 import {
-  USER_ACTIONS,
   getUser,
 } from './users';
 
 import {
-  ERROR_ACTIONS,
   parseError,
   resetError
 } from './errors';
 
 import {
-  POST_ACTIONS,
   createPost,
   getPost,
   getPosts,
@@ -26,29 +22,22 @@ import {
   updatePost,
 } from './posts';
 
-
 import {
-  COMMENT_ACTIONS,
   createComment,
 } from './comments';
 
 export {
-  ERROR_ACTIONS,
   parseError,
   resetError,
-  AUTH_ACTIONS,
   setAuthentification,
   signInUser,
   signUpUser,
   signOutUser,
-  USER_ACTIONS,
   getUser,
-  POST_ACTIONS,
   createPost,
   updatePost,
   getPost,
   getPosts,
   deletePost,
-  COMMENT_ACTIONS,
   createComment,
 };

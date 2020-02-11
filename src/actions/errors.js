@@ -1,7 +1,4 @@
-const ERROR_ACTIONS = {
-  PARSE_ERROR: 'PARSE_ERROR',
-  RESET_ERROR: 'RESET_ERROR',
-};
+import { ERROR_ACTIONS } from '../constants';
 
 function parseError(errorMessage) {
   return {
