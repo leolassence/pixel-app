@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import 'errors.css';
 @import 'reset.css';
 @import 'global.css';
 @import 'navigation.css';

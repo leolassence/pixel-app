@@ -67,9 +67,6 @@ render() {
             <div className="profile__name">
               <h1 className="profile__title">Rich_Geek</h1>
               <Link to={`/user/edit/${this.props.user.username}`} className="profile__button u-fat-text">Edit profile</Link>
-              <span style={{ fontSize: '1.5em', color: 'grey', }}>
-                <i className="fa fa-cog" id="cog" />
-              </span>
             </div>
             <ul className="profile__numbers">
               <li className="profile__posts">
@@ -92,11 +89,9 @@ render() {
               <p className="profile__full-bio">Ut enim ad minim veniam, quis nostrud exercition ni.</p>
               <br />
               <br />
-              <a href="#" target="_blank" className="profile__link u-fat-text"> toto.fr </a>
             </div>
           </div>
         </header>
-
         <div className="tab-content">
           <div className="profile__pictures active" id="images" data-tab-content>
             {this.renderPosts()}

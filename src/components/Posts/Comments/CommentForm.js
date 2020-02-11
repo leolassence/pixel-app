@@ -29,7 +29,7 @@ class CommentForm extends Component {
   render() {
     return (
       <div className="photo__add-comment-container">
-        <Form schema={schema} onSubmit={this.handleSubmit} className="form">
+        <Form schema={schema} onSubmit={this.handleSubmit}>
           <Input
             name="message"
             type="text"
@@ -38,7 +38,7 @@ class CommentForm extends Component {
             placeholder="Add a comment..."
             className="photo__add-comment"
           />
-          <i className="fas fa-location-arrow" />
+          <i className="fa fa-location-arrow" />
         </Form>
       </div>
     );

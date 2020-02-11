@@ -19,7 +19,7 @@ class Post extends Component {
         <>
           <Link to={`/updatepost/${post._id}`}>
             <span className="photo__icon">
-              <i className="far fa-edit" />
+              <i className="fa fa-edit" />
               &nbsp;
             </span>
           </Link>
@@ -86,15 +86,7 @@ class Post extends Component {
         <div className="photo__info">
           <div className="photo__icons">
             <span className="photo__icon">
-              <i className="fas fa-heart heart" />
-              &nbsp;
-            </span>
-            <span className="photo__icon">
-              <i className="far fa-comment-dots" />
-              &nbsp;
-            </span>
-            <span className="photo__icon">
-              <i className="far fa-bookmark" />
+              <i className="fa fa-heart heart" />
               &nbsp;
             </span>
             {this.renderCurrentUserActions()}
@@ -116,28 +108,6 @@ class Post extends Component {
     );
   }
 }
-
-// <div className="post card col-md-6 offset-3">
-//   <Link to={`/post/${post._id}`}>
-//     <img src={post.coverImage} className="card-img-top" alt={post.title} />
-//   </Link>
-//   <div className="card-body">
-//     <h5 className="card-title">{post.title}</h5>
-//     <p className="card-text">{post.description}</p>
-//   </div>
-//   <ul className="list-group list-group-flush">
-//     <li className="list-group-item">
-//       <Link to={`/user/${post.username}`}>{post.username}</Link>
-//     </li>
-//     <li className="list-group-item">{post.location}</li>
-//     <li className="list-group-item">
-//       {this.renderComments()}
-//     </li>
-//   </ul>
-//   {this.renderCommentForm()}
-//   {this.renderCurrentUserActions()}
-// </div>
-
 
 Post.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,

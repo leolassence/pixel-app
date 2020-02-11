@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import '../assets/css/style.css';
+import 'font-awesome/css/font-awesome.min.css';
 import HomeContainer from '../components/Home';
 import HeaderContainer from '../components/Header';
 import Footer from '../components/Footer';

@@ -9,20 +9,20 @@ class Header extends Component {
     if (this.props.isLoggedIn) {
       return [
         <Link key={1} to="/" href="explore.html" className="navigation__link">
-          <i className="far fa-compass" />
+          <i className="fa fa-compass" />
         </Link>,
         <Link key={2} to="/" href="notifications.html" className="navigation__link notif ">
-          <i className="far fa-heart" />
+          <i className="fa fa-heart" />
         </Link>,
         <Link key={3} to="/createpost" className="navigation__link">
-          <i className="fas fa-plus" />
+          <i className="fa fa-plus" />
         </Link>,
         <Link
           key={4}
           to={`/user/${localStorage.getItem('username')}`}
           className="navigation__link"
         >
-          <i className="far fa-user" />
+          <i className="fa fa-user" />
         </Link>,
         <Link
           key={5}
@@ -31,13 +31,13 @@ class Header extends Component {
           type="button"
           onClick={() => this.props.signOutUser()}
         >
-          <i className="fas fa-sign-out-alt" />
+          <i className="fa fa-sign-out" />
         </Link>
       ];
     }
     return (
       <Link to="/signin" className="navigation__link">
-        <i className="fas fa-sign-in-alt" />
+        <i className="fa fa-sign-in" />
       </Link>
     );
   }
