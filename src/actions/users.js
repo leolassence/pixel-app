@@ -22,7 +22,50 @@ function getUser({ username }) {
   };
 }
 
+function updateUser({ userId, formData, data }, history) {
+  return async dispatch => {
+    try {
+      const requestConfig = {
+        headers: {
+          authorization: localStorage.getItem('token')
+        },
+      };
+
+      const { data: { imageId } } = await axios({
+        method: 'post',
+        ...requestConfig,
+        url: `${API_ENDPOINT}/images`,
+        data: formData,
+      });
+
+      if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
+
+      const { data: { updatedUser } } = await axios({
+        method: 'put',
+        ...requestConfig,
+        url: `${API_ENDPOINT}/users/${userId}`,
+        data: {
+          ...data,
+          imageId
+        }
+      });
+
+      if (!updatedUser) return dispatch(parseError('Internal server Error'));
+
+      dispatch({
+        type: USER_ACTIONS.UPDATE_USER,
+        payload: updatedUser
+      });
+
+      return history.push(`/user/${updatedUser.username}`);
+    } catch (error) {
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
+    }
+  };
+}
+
 export {
-  USER_ACTIONS,
-  getUser
+  getUser,
+  updateUser,
 };

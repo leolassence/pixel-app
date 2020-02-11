@@ -64,7 +64,6 @@ function signOutUser() {
 }
 
 export {
-  AUTH_ACTIONS,
   setAuthentification,
   signInUser,
   signUpUser,

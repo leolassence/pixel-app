@@ -152,7 +152,6 @@ function deletePost(postId, history) {
 }
 
 export {
-  POST_ACTIONS,
   createPost,
   updatePost,
   getPost,
