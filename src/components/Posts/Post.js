@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { isCurrentUserPost } from '../../helpers';
-import { CommentFormContainer, Comment } from './Comments';
+import { CommentFormContainer, Comment } from '../Comments';
 import userImg from '../../assets/images/user.png';
 
 class Post extends Component {

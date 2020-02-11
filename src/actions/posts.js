@@ -1,15 +1,8 @@
 import axios from 'axios';
-
+import { POST_ACTIONS } from '../constants';
 import { parseError } from './errors';
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-const POST_ACTIONS = {
-  GET_POST: 'GET_POST',
-  CREATE_POST: 'CREATE_POST',
-  UPDATE_POST: 'UPDATE_POST',
-  GET_POSTS: 'GET_POSTS',
-  DELETE_POST: 'DELETE_POST',
-};
 
 function getPosts(query, options) {
   return async dispatch => {

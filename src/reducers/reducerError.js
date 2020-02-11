@@ -1,4 +1,4 @@
-import { ERROR_ACTIONS } from '../actions';
+import { ERROR_ACTIONS } from '../constants';
 
 const initialState = {
   message: ''

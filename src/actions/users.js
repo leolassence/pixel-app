@@ -1,11 +1,8 @@
 import axios from 'axios';
-
+import { USER_ACTIONS } from '../constants';
 import { parseError } from './errors';
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-const USER_ACTIONS = {
-  GET_USER: 'GET_USER'
-};
 
 function getUser({ username }) {
   return async dispatch => {

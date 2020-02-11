@@ -1,12 +1,9 @@
 import axios from 'axios';
-
+import { AUTH_ACTIONS } from '../constants';
 import { parseError } from './errors';
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-const AUTH_ACTIONS = {
-  SET_AUTHENTIFICATIONS: 'SET_AUTHENTIFICATIONS',
-  PARSE_MESSAGE: 'PARSE_MESSAGE',
-};
+
 
 function setAuthentification(isLoggedIn) {
   return {

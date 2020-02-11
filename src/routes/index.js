@@ -16,7 +16,9 @@ import SignUpContainer from '../components/SignUp';
 import ErrorsContainer from '../components/Errors';
 import { UserContainer, EditProfileContainer } from '../components/User';
 import NotFound from '../components/NotFound';
-import { CreatePostContainer, PostPageContainer, UpdatePostContainer } from '../components/Posts';
+import CreatePostContainer from '../components/CreatePost';
+import UpdatePostContainer from '../components/UpdatePost';
+import PostPageContainer from '../components/PostPage';
 
 export default (
   <BrowserRouter>

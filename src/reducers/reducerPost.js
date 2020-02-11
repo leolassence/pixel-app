@@ -1,7 +1,7 @@
 import {
   POST_ACTIONS,
   COMMENT_ACTIONS,
-} from '../actions';
+} from '../constants';
 
 const initialState = {
   post: {},

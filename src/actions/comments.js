@@ -1,11 +1,8 @@
 import axios from 'axios';
-
+import { COMMENT_ACTIONS } from '../constants';
 import { parseError } from './errors';
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-const COMMENT_ACTIONS = {
-  CREATE_COMMENT: 'CREATE_COMMENT',
-};
 
 function createComment({ message, postId }) {
   return async dispatch => {
