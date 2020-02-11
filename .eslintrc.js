@@ -14,6 +14,7 @@ module.exports = {
   },
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-fragments": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "implicit-arrow-linebreak": "off",
     "comma-dangle": "off",
