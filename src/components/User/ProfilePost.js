@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ProfilePost = ({ post }) => (
-  <Link to={`/post/${post._id}`} className="profile-picture">
+  <Link to={`/post/${post._id}`} className="col-md-4 thumbnail profile-picture">
     <img
       src={post.coverImage}
       alt={post.title}
