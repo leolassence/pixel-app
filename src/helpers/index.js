@@ -3,7 +3,7 @@ function isCurrentUserPost(props) {
 
   const currentUser = localStorage.getItem('username');
 
-  if (isLoggedIn && post.username === currentUser) {
+  if (isLoggedIn && post.user.username === currentUser) {
     return true;
   }
 

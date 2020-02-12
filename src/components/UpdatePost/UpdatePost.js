@@ -19,7 +19,7 @@ class UpdatePost extends Component {
     } = this.props;
 
     getPost(postId).then(({ payload }) => {
-      if (isLoggedIn && payload.username === localStorage.getItem('username')) {
+      if (isLoggedIn && payload.user.username === localStorage.getItem('username')) {
         this.setState({
           editReady: true,
           post: {

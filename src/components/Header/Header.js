@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import imgLogo from '../../assets/images/navLogo.png';
+import logo from '../../assets/images/logo.png';
 
 class Header extends Component {
   renderAuthenticateLink = () => {
@@ -43,7 +43,7 @@ class Header extends Component {
       <nav className="navigation">
         <Link to="/" title="Home">
           <img
-            src={imgLogo}
+            src={logo}
             alt="logo"
             title="logo"
             className="navigation__logo"
