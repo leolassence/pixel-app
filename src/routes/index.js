@@ -20,6 +20,7 @@ import CreatePostContainer from '../components/CreatePost';
 import UpdatePostContainer from '../components/UpdatePost';
 import PostPageContainer from '../components/PostPage';
 import NotFound from '../components/NotFound';
+import RequireAuth from '../components/HOC';
 
 export default (
   <BrowserRouter>
@@ -27,13 +28,13 @@ export default (
     <ErrorsContainer />
     <Switch>
       <Route exact path="/" component={HomeContainer} />
-      <Route exact path="/user/edit/:username" component={UpdateUserContainer} />
+      <Route exact path="/user/edit/:username" component={RequireAuth(UpdateUserContainer)} />
       <Route exact path="/user/:username" component={UserContainer} />
       <Route exact path="/post/:postId" component={PostPageContainer} />
       <Route exact path="/signin" component={SignInContainer} />
       <Route exact path="/signup" component={SignUpContainer} />
-      <Route exact path="/createpost" component={CreatePostContainer} />
-      <Route exact path="/updatepost/:postId" component={UpdatePostContainer} />
+      <Route exact path="/createpost" component={RequireAuth(CreatePostContainer)} />
+      <Route exact path="/updatepost/:postId" component={RequireAuth(UpdatePostContainer)} />
       <Route path="/notfound" component={NotFound} />
       <Redirect from="*" to="/notfound" />
     </Switch>

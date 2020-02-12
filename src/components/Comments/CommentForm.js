@@ -16,7 +16,6 @@ class CommentForm extends Component {
     this.setState({ message: e.target.value });
   }
 
-
   handleSubmit = e => {
     e.preventDefault();
 
