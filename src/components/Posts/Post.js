@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ class Post extends Component {
       const windowMessage = 'Are you sure you wish to delete this post ?';
 
       return (
-        <>
+        <Fragment>
           <Link to={`/updatepost/${post._id}`}>
             <span className="photo__icon">
               <i className="fa fa-edit" />
@@ -25,11 +25,11 @@ class Post extends Component {
           </Link>
           <a href="#" onClick={() => { if (window.confirm(windowMessage)) this.handleClickDeletePost(); }}>
             <span className="photo__icon">
-              <i className="far fa-trash-alt" />
+              <i className="fa fa-trash" />
               &nbsp;
             </span>
           </a>
-        </>
+        </Fragment>
       );
     }
 

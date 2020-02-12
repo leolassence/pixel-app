@@ -8,17 +8,18 @@ import {
 
 import '../assets/css/style.css';
 import 'font-awesome/css/font-awesome.min.css';
-import HomeContainer from '../components/Home';
 import HeaderContainer from '../components/Header';
+import ErrorsContainer from '../components/Errors';
 import Footer from '../components/Footer';
+import HomeContainer from '../components/Home';
 import SignInContainer from '../components/SignIn';
 import SignUpContainer from '../components/SignUp';
-import ErrorsContainer from '../components/Errors';
-import { UserContainer, EditProfileContainer } from '../components/User';
-import NotFound from '../components/NotFound';
+import UserContainer from '../components/User';
+import UpdateUserContainer from '../components/UpdateUser';
 import CreatePostContainer from '../components/CreatePost';
 import UpdatePostContainer from '../components/UpdatePost';
 import PostPageContainer from '../components/PostPage';
+import NotFound from '../components/NotFound';
 
 export default (
   <BrowserRouter>
@@ -26,7 +27,7 @@ export default (
     <ErrorsContainer />
     <Switch>
       <Route exact path="/" component={HomeContainer} />
-      <Route exact path="/user/edit/:username" component={EditProfileContainer} />
+      <Route exact path="/user/edit/:username" component={UpdateUserContainer} />
       <Route exact path="/user/:username" component={UserContainer} />
       <Route exact path="/post/:postId" component={PostPageContainer} />
       <Route exact path="/signin" component={SignInContainer} />

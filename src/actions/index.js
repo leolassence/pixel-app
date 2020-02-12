@@ -7,6 +7,7 @@ import {
 
 import {
   getUser,
+  updateUser,
 } from './users';
 
 import {
@@ -22,9 +23,7 @@ import {
   updatePost,
 } from './posts';
 
-import {
-  createComment,
-} from './comments';
+import createComment from './comments';
 
 export {
   parseError,
@@ -37,6 +36,7 @@ export {
   createPost,
   updatePost,
   getPost,
+  updateUser,
   getPosts,
   deletePost,
   createComment,

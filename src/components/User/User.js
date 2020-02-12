@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProfilePost from './ProfilePost';
-import userImg from '../../assets/images/user.png';
 
 class Profile extends Component {
   componentDidMount() {
@@ -22,21 +21,6 @@ class Profile extends Component {
     this.props.getPosts(query, options);
   }
 
-  renderUser() {
-    const { user } = this.props;
-
-    if (user) {
-      return (
-        <div>
-          <h5>{user.username}</h5>
-          <h5>{user.email}</h5>
-        </div>
-      );
-    }
-
-    return null;
-  }
-
   renderPosts = () => {
     if (this.props.postList) {
       return this.props.postList.map(post => (
@@ -52,48 +36,49 @@ class Profile extends Component {
 }
 
 render() {
+  const { user } = this.props;
   return (
     <main className="profile-container">
       <section className="profile">
         <header className="profile__header">
           <div className="profile__avatar-container">
             <img
-              src={userImg}
+              src={user.profileImage}
               className="profile__avatar"
               alt="user img"
             />
           </div>
           <div className="profile__info">
             <div className="profile__name">
-              <h1 className="profile__title">Rich_Geek</h1>
-              <Link to={`/user/edit/${this.props.user.username}`} className="profile__button u-fat-text">Edit profile</Link>
+              <h1 className="profile__title">{user.username}</h1>
+              <Link to={`/user/edit/${user.username}`} className="profile__button u-fat-text">Edit profile</Link>
             </div>
             <ul className="profile__numbers">
               <li className="profile__posts">
                 <span className="profile__number u-fat-text">10</span>
-                posts
+                &nbsp;posts
               </li>
               <li className="profile__followers">
                 <span className="profile__number u-fat-text">40</span>
-                followers
+                &nbsp;followers
               </li>
               <li className="profile__following">
                 <span className="profile__number u-fat-text">134</span>
-                following
+                &nbsp;following
               </li>
             </ul>
             <div className="profile__bio">
-              <span className="profile__full-name u-fat-text">Loyd RG Tafireyi</span>
+              <span className="profile__full-name u-fat-text">{user.name}</span>
               <br />
               <br />
-              <p className="profile__full-bio">Ut enim ad minim veniam, quis nostrud exercition ni.</p>
+              <p className="profile__full-bio">{user.bio}</p>
               <br />
               <br />
             </div>
           </div>
         </header>
         <div className="tab-content">
-          <div className="profile__pictures active" id="images" data-tab-content>
+          <div className="profile__pictures row active" id="images" data-tab-content>
             {this.renderPosts()}
           </div>
         </div>
@@ -113,12 +98,14 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  user: PropTypes.shape({
-    username: PropTypes.string,
-    email: PropTypes.string,
-  }).isRequired,
   getUser: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    name: PropTypes.string,
+    profileImage: PropTypes.string,
+    bio: PropTypes.string,
+  }).isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,

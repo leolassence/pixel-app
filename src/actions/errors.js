@@ -14,7 +14,6 @@ function resetError() {
 }
 
 export {
-  ERROR_ACTIONS,
   parseError,
   resetError
 };

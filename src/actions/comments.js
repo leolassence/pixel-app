@@ -29,7 +29,4 @@ function createComment({ message, postId }) {
   };
 }
 
-export {
-  COMMENT_ACTIONS,
-  createComment,
-};
+export default createComment;
