@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProfilePost from './ProfilePost';
 
+import defaultProfileImage from '../../assets/images/user.png';
+
 class Profile extends Component {
   componentDidMount() {
     const {
@@ -12,24 +14,42 @@ class Profile extends Component {
       history
     } = this.props;
 
-    const query = { username };
-    const options = { limit: 5 };
-
     if (!username) history.push('/notfound');
 
-    this.props.getUser({ username });
-    this.props.getPosts(query, options);
+    this.props.getUser({ username }).then(() => {
+      this.props.getPosts({ userId: this.props.user.userId }, { limit: 12 });
+    });
   }
 
   renderPosts = () => {
     if (this.props.postList) {
+      if (!this.props.postList.length) {
+        return (
+          <div className="jumbotron">
+            <h1>Welcome to your profile !</h1>
+            <hr className="my-4" />
+            <p className="lead">
+              <Link to={`/user/edit/${this.props.user.username}`} role="button">
+                - Edit your profile
+              </Link>
+            </p>
+            <br />
+            <p className="lead">
+              <Link to="/createpost" role="button">
+                - Share your first post
+              </Link>
+            </p>
+          </div>
+        );
+      }
+
       return this.props.postList.map(post => (
         <ProfilePost
           key={post._id}
           post={post}
           history={this.props.history}
         />
-    ));
+      ));
   }
 
   return (<h1>Loading ...</h1>);
@@ -43,7 +63,7 @@ render() {
         <header className="profile__header">
           <div className="profile__avatar-container">
             <img
-              src={user.profileImage}
+              src={user.profileImage ? user.profileImage : defaultProfileImage}
               className="profile__avatar"
               alt="user img"
             />
@@ -101,6 +121,7 @@ Profile.propTypes = {
   getUser: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
   user: PropTypes.shape({
+    userId: PropTypes.string,
     username: PropTypes.string,
     name: PropTypes.string,
     profileImage: PropTypes.string,
@@ -109,7 +130,6 @@ Profile.propTypes = {
   postList: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,

@@ -32,6 +32,8 @@
     display: block;
     font-weight: 600;
     margin-bottom: 5px;
+    text-decoration: none;
+    color: #212529;
 }
 
 .photo__file{

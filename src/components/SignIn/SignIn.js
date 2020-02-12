@@ -6,8 +6,6 @@ import schema from './schema';
 
 import phone from '../../assets/images/phone.png';
 import logo from '../../assets/images/logo.png';
-import ios from '../../assets/images/ios.png';
-import android from '../../assets/images/android.png';
 
 class SignIn extends Component {
   handleSubmit = ({ signInId, password }) => this.props.signInUser({
@@ -35,6 +33,7 @@ class SignIn extends Component {
               title="Logo"
               className="login__logo"
             />
+            <br />
             <Form schema={schema} onSubmit={this.handleSubmit} className="login__form">
               <div className="login__input-container">
                 <Input
@@ -51,7 +50,6 @@ class SignIn extends Component {
                   placeholder="Password"
                   className="login__input"
                 />
-                <a href="#forgot" className="login__form-link">Forgot?</a>
               </div>
               <div className="login__input-container">
                 <input
@@ -71,26 +69,6 @@ class SignIn extends Component {
                 Sign up
               </Link>
             </span>
-          </div>
-
-          <div className="login__section login__section--transparent login__app">
-            <span className="login__text">
-              Get the app.
-            </span>
-            <div className="login__appstores">
-              <img
-                src={ios}
-                alt="iOS"
-                title="Get the app!"
-                className="login__appstore"
-              />
-              <img
-                src={android}
-                alt="Android"
-                title="Get the app!"
-                className="login__appstore"
-              />
-            </div>
           </div>
         </section>
       </main>

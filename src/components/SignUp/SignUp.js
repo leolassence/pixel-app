@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 import schema from './schema';
 import phone from '../../assets/images/phone.png';
 import logo from '../../assets/images/logo.png';
-import ios from '../../assets/images/ios.png';
-import android from '../../assets/images/android.png';
-
 
 class SignUp extends Component {
   handleSubmit = ({ email, username, password }) => this.props.signUpUser({
@@ -35,7 +32,7 @@ class SignUp extends Component {
               title="Logo"
               className="login__logo"
             />
-            <p className="text-for-member">Sign up to see photos and videos from your friends.</p>
+            <br />
             <Form schema={schema} onSubmit={this.handleSubmit} className="login__form">
               <div className="login__input-container">
                 <Input
@@ -86,25 +83,6 @@ class SignUp extends Component {
                 Sign In
               </Link>
             </span>
-          </div>
-          <div className="login__section login__section--transparent login__app">
-            <span className="login__text">
-              Get the app.
-            </span>
-            <div className="login__appstores">
-              <img
-                src={ios}
-                alt="iOS"
-                title="Get the app!"
-                className="login__appstore"
-              />
-              <img
-                src={android}
-                alt="Android"
-                title="Get the app!"
-                className="login__appstore"
-              />
-            </div>
           </div>
         </section>
       </main>

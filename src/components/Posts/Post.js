@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { isCurrentUserPost } from '../../helpers';
 import { CommentFormContainer, Comment } from '../Comments';
-import userImg from '../../assets/images/user.png';
 
 class Post extends Component {
   handleClickDeletePost = () => this.props.deletePost(this.props.post._id, this.props.history);
@@ -66,14 +65,18 @@ class Post extends Component {
       <section className="photo">
         <header className="photo__header">
           <div className="photo__header-column">
-            <img
-              className="photo__avatar"
-              src={userImg}
-              alt={post.username}
-            />
+            <Link to={`/user/${post.user.username}`}>
+              <img
+                className="photo__avatar"
+                src={post.user.profileImage}
+                alt={post.user.username}
+              />
+            </Link>
           </div>
           <div className="photo__header-column">
-            <span className="photo__username">{post.username}</span>
+            <Link to={`/user/${post.user.username}`}>
+              <span className="photo__username">{post.user.username}</span>
+            </Link>
             <span className="photo__location">{post.location}</span>
           </div>
         </header>
@@ -94,7 +97,7 @@ class Post extends Component {
           <span className="photo__likes">35 likes</span>
           <ul className="photo__comments">
             <li className="photo__comment">
-              <span className="photo__comment-author">{post.username}</span>
+              <span className="photo__comment-author">{post.user.username}</span>
               {post.description}
             </li>
           </ul>
@@ -114,11 +117,14 @@ Post.propTypes = {
   history: PropTypes.shape({}).isRequired,
   post: PropTypes.shape({
     _id: PropTypes.string,
-    username: PropTypes.string,
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,
     coverImage: PropTypes.string,
+    user: PropTypes.shape({
+      username: PropTypes.string,
+      profileImage: PropTypes.string,
+    }).isRequired,
     comments: PropTypes.arrayOf(
       PropTypes.shape({
         username: PropTypes.string,

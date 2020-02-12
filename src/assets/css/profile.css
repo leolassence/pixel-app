@@ -243,3 +243,17 @@ opacity: 1;
   background-color: #3897f0;
   color: white;
 }
+
+.jumbotron {
+  background-color: #ffffff;
+  color: #4f4f4f;
+}
+
+.jumbotron h1 {
+  font-size: 40px;
+}
+
+.lead a {
+  text-decoration: none;
+  color: #4f4f4f;
+}

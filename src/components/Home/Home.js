@@ -40,11 +40,14 @@ Home.propTypes = {
   postList: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     coverImag: PropTypes.string,
+    user: PropTypes.shape({
+      username: PropTypes.string,
+      profileImage: PropTypes.string,
+    }).isRequired,
   })).isRequired,
 };
 

@@ -26,11 +26,13 @@ ProfilePost.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     coverImage: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    })
   }).isRequired,
 };
 
