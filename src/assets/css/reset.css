@@ -44,3 +44,7 @@ table {
 input{
     border:0;
 }
+.reset-button-link {
+  border: none;
+  padding: 0;
+}

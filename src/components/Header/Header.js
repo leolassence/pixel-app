@@ -1,66 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import HeaderAuthenticateLinks from './HeaderAuthenticateLinks';
 import logo from '../../assets/images/logo.png';
 
-class Header extends Component {
-  renderAuthenticateLink = () => {
-    if (this.props.isLoggedIn) {
-      return [
-        <Link key={3} to="/createpost" className="navigation__link" title="Create Post">
-          <i className="fa fa-plus" />
-        </Link>,
-        <Link
-          key={4}
-          to={`/user/${localStorage.getItem('username')}`}
-          className="navigation__link"
-          title="Profile"
-        >
-          <i className="fa fa-user" />
-        </Link>,
-        <Link
-          key={5}
-          to="/"
-          className="navigation__link"
-          type="button"
-          title="Sign Out"
-          onClick={() => this.props.signOutUser()}
-        >
-          <i className="fa fa-sign-out" />
-        </Link>
-      ];
-    }
-    return (
-      <Link to="/signin" className="navigation__link" title="Sign In">
-        <i className="fa fa-sign-in" />
+const Header = props => {
+  const { isLoggedIn, signOutUser } = props;
+
+  return (
+    <nav className="navigation">
+      <Link to="/" title="Home">
+        <img
+          src={logo}
+          alt="logo"
+          title="logo"
+          className="navigation__logo"
+        />
       </Link>
-    );
-  }
-
-  render() {
-    return (
-      <nav className="navigation">
-        <Link to="/" title="Home">
-          <img
-            src={logo}
-            alt="logo"
-            title="logo"
-            className="navigation__logo"
-          />
-        </Link>
-        <div className="navigation__search-container">
-          <i className="fa fa-search" />
-          <input type="text" placeholder="Search" />
-        </div>
-        <div className="navigation__icons">
-          {this.renderAuthenticateLink()}
-        </div>
-      </nav>
-    );
-  }
-}
-
+      <div className="navigation__search-container">
+        <i className="fa fa-search" />
+        <input type="text" placeholder="Search" />
+      </div>
+      <div className="navigation__icons">
+        <HeaderAuthenticateLinks
+          isLoggedIn={isLoggedIn}
+          signOutUser={signOutUser}
+        />
+      </div>
+    </nav>
+  );
+};
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import ProfilePost from './ProfilePost';
-
-import defaultProfileImage from '../../assets/images/user.png';
+import UserInfos from './UserInfos';
+import UserRenderPosts from './UserRenderPosts';
 
 class Profile extends Component {
   componentDidMount() {
@@ -21,87 +19,18 @@ class Profile extends Component {
     });
   }
 
-  renderPosts = () => {
-    if (this.props.postList) {
-      if (!this.props.postList.length) {
-        return (
-          <div className="jumbotron">
-            <h1>Welcome to your profile !</h1>
-            <hr className="my-4" />
-            <p className="lead">
-              <Link to={`/user/edit/${this.props.user.username}`} role="button">
-                - Edit your profile
-              </Link>
-            </p>
-            <br />
-            <p className="lead">
-              <Link to="/createpost" role="button">
-                - Share your first post
-              </Link>
-            </p>
-          </div>
-        );
-      }
-
-      return this.props.postList.map(post => (
-        <ProfilePost
-          key={post._id}
-          post={post}
-          history={this.props.history}
-        />
-      ));
-  }
-
-  return (<h1>Loading ...</h1>);
-}
-
 render() {
-  const { user } = this.props;
+  const { user, postList, history } = this.props;
+
   return (
     <main className="profile-container">
       <section className="profile">
-        <header className="profile__header">
-          <div className="profile__avatar-container">
-            <img
-              src={user.profileImage ? user.profileImage : defaultProfileImage}
-              className="profile__avatar"
-              alt="user img"
-            />
-          </div>
-          <div className="profile__info">
-            <div className="profile__name">
-              <h1 className="profile__title">{user.username}</h1>
-              <Link to={`/user/edit/${user.username}`} className="profile__button u-fat-text">Edit profile</Link>
-            </div>
-            <ul className="profile__numbers">
-              <li className="profile__posts">
-                <span className="profile__number u-fat-text">10</span>
-                &nbsp;posts
-              </li>
-              <li className="profile__followers">
-                <span className="profile__number u-fat-text">40</span>
-                &nbsp;followers
-              </li>
-              <li className="profile__following">
-                <span className="profile__number u-fat-text">134</span>
-                &nbsp;following
-              </li>
-            </ul>
-            <div className="profile__bio">
-              <span className="profile__full-name u-fat-text">{user.name}</span>
-              <br />
-              <br />
-              <p className="profile__full-bio">{user.bio}</p>
-              <br />
-              <br />
-            </div>
-          </div>
-        </header>
-        <div className="tab-content">
-          <div className="profile__pictures row active" id="images" data-tab-content>
-            {this.renderPosts()}
-          </div>
-        </div>
+        <UserInfos user={user} />
+        <UserRenderPosts
+          postList={postList}
+          user={user}
+          history={history}
+        />
       </section>
     </main>
     );
@@ -109,7 +38,6 @@ render() {
 }
 
 Profile.propTypes = {
-  // isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired

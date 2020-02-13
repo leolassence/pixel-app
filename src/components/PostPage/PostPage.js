@@ -15,13 +15,10 @@ class PostPage extends Component {
   }
 
   renderPost = () => {
-    if (Object.entries(this.props.post).length !== 0) {
-      return (
-        <PostContainer
-          post={this.props.post}
-          history={this.props.history}
-        />
-      );
+    const { post, history } = this.props;
+
+    if (Object.entries(post).length !== 0) {
+      return <PostContainer post={post} history={history} />;
     }
 
     return (<h1>Loading ...</h1>);
@@ -37,7 +34,6 @@ class PostPage extends Component {
 }
 
 PostPage.propTypes = {
-  // isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       postId: PropTypes.string.isRequired

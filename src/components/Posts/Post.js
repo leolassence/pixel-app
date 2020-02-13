@@ -1,116 +1,56 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import PostAuthorActions from './PostAuthorActions';
+import PostHeader from './PostHeader';
+import PostRenderComments from './PostRenderComments';
+import PostCommentForm from './PostCommentForm';
 
-import { isCurrentUserPost } from '../../helpers';
-import { CommentFormContainer, Comment } from '../Comments';
+const Post = props => {
+  const {
+    post,
+    isLoggedIn,
+    history,
+    deletePost,
+  } = props;
 
-class Post extends Component {
-  handleClickDeletePost = () => this.props.deletePost(this.props.post._id, this.props.history);
+  // TODO check if best practice (maybe cpdm)
+  if (!post) return <p>Loading...</p>;
 
-  renderCurrentUserActions = () => {
-    const { post, isLoggedIn } = this.props;
-
-    if (isLoggedIn && isCurrentUserPost(this.props)) {
-      const windowMessage = 'Are you sure you wish to delete this post ?';
-
-      return (
-        <Fragment>
-          <Link to={`/updatepost/${post._id}`}>
-            <span className="photo__icon">
-              <i className="fa fa-edit" />
-              &nbsp;
-            </span>
-          </Link>
-          <a href="#" onClick={() => { if (window.confirm(windowMessage)) this.handleClickDeletePost(); }}>
-            <span className="photo__icon">
-              <i className="fa fa-trash" />
-              &nbsp;
-            </span>
-          </a>
-        </Fragment>
-      );
-    }
-
-    return null;
-  }
-
-  renderCommentForm = () => {
-    if (this.props.isLoggedIn) {
-      return <CommentFormContainer postId={this.props.post._id} />;
-    }
-
-    return null;
-  }
-
-  renderComments = () => {
-    const { post } = this.props;
-    return post.comments.map(c => (
-      <Comment
-        key={Math.random().toString(36).substr(2, 9)}
-        username={c.username}
-        message={c.message}
-      />
-    ));
-  }
-
-  render() {
-    const { post } = this.props;
-
-    if (!post) {
-      return <p>Loading...</p>;
-    }
-
-    return (
-      <section className="photo">
-        <header className="photo__header">
-          <div className="photo__header-column">
-            <Link to={`/user/${post.user.username}`}>
-              <img
-                className="photo__avatar"
-                src={post.user.profileImage}
-                alt={post.user.username}
-              />
-            </Link>
-          </div>
-          <div className="photo__header-column">
-            <Link to={`/user/${post.user.username}`}>
-              <span className="photo__username">{post.user.username}</span>
-            </Link>
-            <span className="photo__location">{post.location}</span>
-          </div>
-        </header>
-
-        <div className="photo__file-container">
-          <Link to={`/post/${post._id}`}>
-            <img className="photo__file" src={post.coverImage} alt={post.title} />
-          </Link>
+  return (
+    <section className="photo">
+      <PostHeader post={post} />
+      <div className="photo__info">
+        <div className="photo__icons">
+          <span className="photo__icon">
+            <i className="fa fa-heart heart" />
+            &nbsp;
+          </span>
+          <PostAuthorActions
+            post={post}
+            isLoggedIn={isLoggedIn}
+            deletePost={deletePost}
+            history={history}
+          />
         </div>
-        <div className="photo__info">
-          <div className="photo__icons">
-            <span className="photo__icon">
-              <i className="fa fa-heart heart" />
-              &nbsp;
-            </span>
-            {this.renderCurrentUserActions()}
-          </div>
-          <span className="photo__likes">35 likes</span>
-          <ul className="photo__comments">
-            <li className="photo__comment">
-              <span className="photo__comment-author">{post.user.username}</span>
-              {post.description}
-            </li>
-          </ul>
-          <ul className="photo__comments">
-            {this.renderComments()}
-          </ul>
-          <span className="photo__time-ago">10 hours ago</span>
-          {this.renderCommentForm()}
-        </div>
-      </section>
-    );
-  }
-}
+        <span className="photo__likes">35 likes</span>
+        <ul className="photo__comments">
+          <li className="photo__comment">
+            <span className="photo__comment-author">{post.user.username}</span>
+            {post.description}
+          </li>
+        </ul>
+        <ul className="photo__comments">
+          <PostRenderComments comments={post.comments} />
+        </ul>
+        <span className="photo__time-ago">10 hours ago</span>
+        <PostCommentForm
+          isLoggedIn={isLoggedIn}
+          postId={post._id}
+        />
+      </div>
+    </section>
+  );
+};
 
 Post.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,

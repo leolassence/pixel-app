@@ -4,19 +4,20 @@ import PostContainer from '../Posts';
 
 class Home extends Component {
   componentDidMount() {
-    const query = {};
-    const options = { limit: 10 };
+    const { getPosts } = this.props;
 
-    this.props.getPosts(query, options);
+    getPosts({}, { limit: 10 });
   }
 
   renderPosts = () => {
-    if (this.props.postList) {
-      return this.props.postList.map(post => (
+    const { postList, history } = this.props;
+
+    if (postList) {
+      return postList.map(post => (
         <PostContainer
           key={post._id}
           post={post}
-          history={this.props.history}
+          history={history}
         />
       ));
     }
@@ -34,7 +35,6 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  // isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({}).isRequired,
   getPosts: PropTypes.func.isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({

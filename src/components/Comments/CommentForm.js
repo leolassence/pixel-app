@@ -19,15 +19,12 @@ class CommentForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    schema.isValid({
-      message: this.state.message
-    }).then(valid => {
-      if (valid) {
-        this.props.createComment({
-          message: this.state.message,
-          postId: this.props.postId,
-        });
+    const { message } = this.state;
+    const { postId } = this.props;
 
+    schema.isValid({ message }).then(valid => {
+      if (valid) {
+        this.props.createComment({ message, postId });
         this.setState({ message: '' });
       }
     });

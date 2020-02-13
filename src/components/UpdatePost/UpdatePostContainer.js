@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { getPost, updatePost } from '../../actions';
 import UpdatePost from './UpdatePost';
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.authentification.isLoggedIn,
   post: state.posts.post,
 });
 
