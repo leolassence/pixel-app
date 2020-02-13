@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Select } from '@rocketseat/unform';
 import schema from './schema';
-
-import userImg from '../../assets/images/user.png';
+import FormHeader from '../FormHeader';
 
 class UserForm extends Component {
   constructor(props) {
@@ -14,13 +13,15 @@ class UserForm extends Component {
       { id: 'female', title: 'Female' },
     ];
 
+    const { user } = props;
+
     this.state = {
-      name: this.props.user.name || '',
-      username: this.props.user.username || '',
-      website: this.props.user.website || '',
-      bio: this.props.user.bio || '',
-      phone: this.props.user.phone || '',
-      profileImage: this.props.user.profileImage || '',
+      name: user.name || '',
+      username: user.username || '',
+      website: user.website || '',
+      bio: user.bio || '',
+      phone: user.phone || '',
+      profileImage: user.profileImage || '',
     };
   }
 
@@ -30,23 +31,21 @@ class UserForm extends Component {
   }
 
   handleData = data => {
+    const { profileImage } = this.state;
     const formData = new FormData();
-    formData.append('coverImage', this.state.profileImage);
+
+    formData.append('coverImage', profileImage);
 
     this.props.handleSubmit({ data, formData });
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <main className="edit-profile">
         <section className="profile-form">
-          <header className="profile-form__header">
-            <div className="profile-form__avatar-container">
-              <img src={userImg} className="profile-form__avatar" alt="User Img" />
-            </div>
-            <h4 className="profile-form__title">RichGeek</h4>
-          </header>
-
+          <FormHeader user={user} />
           <Form schema={schema} onSubmit={this.handleData} className="edit-profile__form" encType="multipart/form-data">
             <div className="edit-profile__form-row">
               <label className="edit-profile__label">name</label>

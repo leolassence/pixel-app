@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
 import schema from './schema';
-
-import userImg from '../../assets/images/user.png';
+import FormHeader from '../FormHeader';
+import PostFormField from './PostFormField';
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
 
+    const { post } = this.props;
+
     this.state = {
-      title: this.props.post.title || '',
-      location: this.props.post.location || '',
-      description: this.props.post.description || '',
-      coverImage: this.props.post.coverImage || '',
+      title: post.title || '',
+      location: post.location || '',
+      description: post.description || '',
+      coverImage: post.coverImage || '',
     };
   }
 
@@ -23,57 +25,39 @@ class PostForm extends Component {
   }
 
   handleData = data => {
+    const { handleSubmit } = this.props;
+    const { coverImage } = this.state;
     const formData = new FormData();
-    formData.append('coverImage', this.state.coverImage);
 
-    this.props.handleSubmit({ data, formData });
+    formData.append('coverImage', coverImage);
+
+    handleSubmit({ data, formData });
   }
 
   render() {
     return (
       <main className="edit-profile">
         <section className="profile-form">
-          <header className="profile-form__header">
-            <div className="profile-form__avatar-container">
-              <img src={userImg} className="profile-form__avatar" alt="User Img" />
-            </div>
-            <h4 className="profile-form__title">RichGeek</h4>
-          </header>
-
+          <FormHeader user={this.props.user} />
           <Form schema={schema} onSubmit={this.handleData} className="edit-profile__form" encType="multipart/form-data">
-            <div className="edit-profile__form-row">
-              <label htmlFor="title" className="edit-profile__label">Title</label>
-              <Input
-                id="title"
-                name="title"
-                value={this.state.title}
-                onChange={e => this.handleChange(e)}
-                type="text"
-                className="edit-profile__input"
-              />
-            </div>
-            <div className="edit-profile__form-row">
-              <label htmlFor="location" className="edit-profile__label">Location</label>
-              <Input
-                id="location"
-                name="location"
-                value={this.state.location}
-                onChange={e => this.handleChange(e)}
-                type="text"
-                className="edit-profile__input"
-              />
-            </div>
-            <div className="edit-profile__form-row">
-              <label htmlFor="description" className="edit-profile__label">Description</label>
-              <Input
-                id="description"
-                name="description"
-                value={this.state.description}
-                onChange={e => this.handleChange(e)}
-                type="text"
-                className="edit-profile__input"
-              />
-            </div>
+            <PostFormField
+              name="title"
+              label="Title"
+              value={this.state.title}
+              handleChange={this.handleChange}
+            />
+            <PostFormField
+              name="location"
+              label="Location"
+              value={this.state.location}
+              handleChange={this.handleChange}
+            />
+            <PostFormField
+              name="description"
+              label="Description"
+              value={this.state.description}
+              handleChange={this.handleChange}
+            />
             <div className="edit-profile__form-row">
               <label htmlFor="coverImage" className="edit-profile__label">Image</label>
               <input
@@ -115,6 +99,10 @@ PostForm.propTypes = {
     description: PropTypes.string,
     coverImage: PropTypes.string,
   }),
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    profileImage: PropTypes.string,
+  }).isRequired,
 };
 
 export default PostForm;

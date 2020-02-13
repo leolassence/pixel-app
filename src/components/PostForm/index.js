@@ -1,3 +1,3 @@
-import PostForm from './PostForm';
+import PostFormContainer from './PostFormContainer';
 
-export default PostForm;
+export default PostFormContainer;

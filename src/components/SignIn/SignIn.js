@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import schema from './schema';
-
 import phone from '../../assets/images/phone.png';
 import logo from '../../assets/images/logo.png';
 
@@ -61,7 +60,6 @@ class SignIn extends Component {
             </Form>
             <br />
           </div>
-
           <div className="login__section login__sign-up">
             <span className="login__text">
               Don&apos;t have an account ?&nbsp;
@@ -85,4 +83,4 @@ SignIn.defaultProps = {
   history: {}
 };
 
-  export default SignIn;
+export default SignIn;

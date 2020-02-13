@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostForm from '../PostForm';
+import PostFormContainer from '../PostForm';
 
 class CreatePost extends Component {
-  componentDidMount() {
-    if (!this.props.isLoggedIn) {
-      this.props.history.push('/signin');
-    }
-  }
-
   handleSubmit = ({ data, formData }) => {
-    this.props.createPost({
-      data,
-      formData
-    }, this.props.history);
+    const { createPost, history } = this.props;
+
+    createPost({ data, formData }, history);
   }
 
   render() {
-    return <PostForm handleSubmit={this.handleSubmit} />;
+    return <PostFormContainer handleSubmit={this.handleSubmit} />;
   }
 }
 
 CreatePost.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
   createPost: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

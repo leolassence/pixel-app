@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Errors extends Component {
+  // TODO replace this hook
   UNSAFE_componentWillUpdate(nextProps) {
-    if (this.props.location.pathname !== nextProps.location.pathname) {
-      this.props.resetError();
+    const { location, resetError } = this.props;
+
+    if (location.pathname !== nextProps.location.pathname) {
+      resetError();
     }
   }
 
   render() {
+    const { error } = this.props;
     return (
-      this.props.error && (
+      error && (
         <div className="col-md-4 offset-4 alert alert-danger" role="alert">
-          {this.props.error}
+          {error}
         </div>
       )
     );

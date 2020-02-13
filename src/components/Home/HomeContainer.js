@@ -5,7 +5,6 @@ import { getPosts } from '../../actions';
 import Home from './Home';
 
 const mapStateToProps = state => ({
-  // isLoggedIn: state.authentification.isLoggedIn,
   postList: state.posts.postList
 });
 

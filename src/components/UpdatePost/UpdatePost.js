@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostForm from '../PostForm';
+import PostFormContainer from '../PostForm';
 
 class UpdatePost extends Component {
   constructor(props) {
@@ -14,12 +14,13 @@ class UpdatePost extends Component {
       match: {
         params: { postId }
       },
-      isLoggedIn,
-      getPost
+      history,
+      getPost,
     } = this.props;
 
     getPost(postId).then(({ payload }) => {
-      if (isLoggedIn && payload.user.username === localStorage.getItem('username')) {
+      // TODO helper to manage this
+      if (payload.user.username === localStorage.getItem('username')) {
         this.setState({
           editReady: true,
           post: {
@@ -32,25 +33,26 @@ class UpdatePost extends Component {
         });
       } else {
         this.setState({ editReady: false });
-        this.props.history.push('/notfound');
+        history.push('/notfound');
       }
     });
   }
 
   handleSubmit = ({ data, formData }) => {
-    this.props.updatePost({
-      postId: this.state.post.postId,
-      data,
-      formData
-    }, this.props.history);
+    const { history, updatePost } = this.props;
+    const { post: { postId } } = this.state;
+
+    updatePost({ postId, data, formData }, history);
   }
 
   render() {
-    if (this.state.editReady) {
+    const { post, editReady } = this.state;
+
+    if (editReady) {
       return (
-        <PostForm
+        <PostFormContainer
           handleSubmit={this.handleSubmit}
-          post={this.state.post}
+          post={post}
         />
       );
     }
@@ -60,7 +62,6 @@ class UpdatePost extends Component {
 }
 
 UpdatePost.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       postId: PropTypes.string.isRequired
@@ -72,7 +73,6 @@ UpdatePost.propTypes = {
   updatePost: PropTypes.func.isRequired,
   getPost: PropTypes.func.isRequired,
   post: PropTypes.shape({
-    username: PropTypes.string,
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,

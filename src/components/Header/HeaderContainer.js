@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setAuthentification, signOutUser } from '../../actions';
+import { signOutUser } from '../../actions';
 import Header from './Header';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    setAuthentification,
     signOutUser
   }, dispatch)
 });

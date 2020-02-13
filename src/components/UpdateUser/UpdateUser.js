@@ -14,37 +14,39 @@ class UpdateUser extends Component {
       match: {
         params: { username }
       },
-      isLoggedIn,
-      getUser
+      getUser,
+      history,
     } = this.props;
 
     getUser({ username }).then(({ payload }) => {
-      if (isLoggedIn && payload.username === localStorage.getItem('username')) {
+      // TODO helper
+      if (payload.username === localStorage.getItem('username')) {
         this.setState({
           editReady: true,
           user: payload
         });
       } else {
         this.setState({ editReady: false });
-        this.props.history.push('/notfound');
+        history.push('/notfound');
       }
     });
   }
 
   handleSubmit = ({ data, formData }) => {
-    this.props.updateUser({
-      userId: this.state.user.userId,
-      data,
-      formData
-    }, this.props.history);
+    const { history, updateUser } = this.props;
+    const { user: { userId } } = this.state;
+
+    updateUser({ userId, data, formData }, history);
   }
 
   render() {
-    if (this.state.editReady) {
+    const { editReady, user } = this.state;
+
+    if (editReady) {
       return (
         <UserForm
           handleSubmit={this.handleSubmit}
-          user={this.state.user}
+          user={user}
         />
       );
     }
@@ -54,7 +56,6 @@ class UpdateUser extends Component {
 }
 
 UpdateUser.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired

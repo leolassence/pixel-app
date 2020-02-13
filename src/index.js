@@ -31,5 +31,4 @@ ReactDOM.render(
   document.querySelector('#root')
 );
 
-
 registerServiceWorker();
