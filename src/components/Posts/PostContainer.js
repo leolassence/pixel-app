@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Post from './Post';
-import { deletePost } from '../../actions';
+import { deletePost, likePost } from '../../actions';
 
 const mapStateToProps = state => ({
   isLoggedIn: state.authentification.isLoggedIn
@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    deletePost
+    deletePost,
+    likePost,
   }, dispatch)
 });
 

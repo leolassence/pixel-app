@@ -49,8 +49,21 @@ export default function PostReducer(state = initialState, action) {
 
       return {
         ...state,
-        postList: state.postList.map(post => [updatedPost].find(i => post.postId === i.postId) || post),
+        postList: state.postList.map(
+          post => [updatedPost].find(i => post.postId === i.postId) || post
+        ),
         post: state.post.postId === updatedPost.postId ? updatedPost : state.post,
+      };
+    }
+    case POST_ACTIONS.LIKE_POST: {
+      const likedPost = action.payload;
+
+      return {
+        ...state,
+        postList: state.postList.map(
+          post => [likedPost].find(i => post.postId === i.postId) || post
+        ),
+        post: state.post.postId === likedPost.postId ? likedPost : state.post,
       };
     }
     default: {
