@@ -12,11 +12,11 @@ const ProfilePost = ({ post }) => (
     <div className="profile-picture__overlay">
       <span className="profile-picture__number">
         <i className="fa fa-heart" />
-        780
+        {post.likeCount}
       </span>
       <span className="profile-picture__number">
         <i className="fa fa-comment" />
-        139
+        {post.commentCount}
       </span>
     </div>
   </Link>
@@ -30,6 +30,8 @@ ProfilePost.propTypes = {
     description: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     coverImage: PropTypes.string.isRequired,
+    likeCount: PropTypes.number.isRequired,
+    commentCount: PropTypes.number.isRequired,
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
     })

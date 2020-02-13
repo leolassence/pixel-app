@@ -21,6 +21,7 @@ import {
   getPosts,
   deletePost,
   updatePost,
+  likePost,
 } from './posts';
 
 import createComment from './comments';
@@ -35,6 +36,7 @@ export {
   getUser,
   createPost,
   updatePost,
+  likePost,
   getPost,
   updateUser,
   getPosts,
