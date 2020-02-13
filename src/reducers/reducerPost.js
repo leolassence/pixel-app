@@ -40,7 +40,7 @@ export default function PostReducer(state = initialState, action) {
       return {
         ...state,
         postList: state.postList.filter(
-          post => post._id === action.payload.deletedPostId ? null : true
+          post => post.postId === action.payload.deletedPostId ? null : true
         ),
       };
     }
@@ -49,8 +49,8 @@ export default function PostReducer(state = initialState, action) {
 
       return {
         ...state,
-        postList: state.postList.map(post => [updatedPost].find(i => post._id === i._id) || post),
-        post: state.post._id === updatedPost._id ? updatedPost : state.post,
+        postList: state.postList.map(post => [updatedPost].find(i => post.postId === i.postId) || post),
+        post: state.post.postId === updatedPost.postId ? updatedPost : state.post,
       };
     }
     default: {

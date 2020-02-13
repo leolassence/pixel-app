@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ProfileImageResolver from '../Common';
 
 const PostFormHeader = props => {
   const { user } = props;
@@ -7,7 +8,11 @@ const PostFormHeader = props => {
   return (
     <header className="profile-form__header">
       <div className="profile-form__avatar-container">
-        <img src={user.profileImage} className="profile-form__avatar" alt="User Img" />
+        <ProfileImageResolver
+          profileImage={user.profileImage}
+          imgClassName="profile-form__avatar"
+          imgAlt={user.username}
+        />
       </div>
       <h4 className="profile-form__title">{user.username}</h4>
     </header>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
+import { isOwner } from '../../helpers';
 
 class UpdateUser extends Component {
   constructor(props) {
@@ -19,8 +20,7 @@ class UpdateUser extends Component {
     } = this.props;
 
     getUser({ username }).then(({ payload }) => {
-      // TODO helper
-      if (payload.username === localStorage.getItem('username')) {
+      if (isOwner(true, payload.username)) {
         this.setState({
           editReady: true,
           user: payload

@@ -14,8 +14,9 @@ export default function (WrappedComponent) {
 
     checkAuth = () => {
       const { isLoggedIn, history } = this.props;
+      const username = localStorage.getItem('username');
 
-      if (!isLoggedIn) {
+      if (!isLoggedIn || !username) {
         history.push('/signin');
       }
     }

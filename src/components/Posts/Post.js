@@ -13,9 +13,6 @@ const Post = props => {
     deletePost,
   } = props;
 
-  // TODO check if best practice (maybe cpdm)
-  if (!post) return <p>Loading...</p>;
-
   return (
     <section className="photo">
       <PostHeader post={post} />
@@ -45,7 +42,7 @@ const Post = props => {
         <span className="photo__time-ago">10 hours ago</span>
         <PostCommentForm
           isLoggedIn={isLoggedIn}
-          postId={post._id}
+          postId={post.postId}
         />
       </div>
     </section>
@@ -56,7 +53,7 @@ Post.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({}).isRequired,
   post: PropTypes.shape({
-    _id: PropTypes.string,
+    postId: PropTypes.string,
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,

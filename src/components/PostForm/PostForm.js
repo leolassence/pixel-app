@@ -35,10 +35,12 @@ class PostForm extends Component {
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <main className="edit-profile">
         <section className="profile-form">
-          <FormHeader user={this.props.user} />
+          <FormHeader user={user} />
           <Form schema={schema} onSubmit={this.handleData} className="edit-profile__form" encType="multipart/form-data">
             <PostFormField
               name="title"

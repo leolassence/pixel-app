@@ -15,7 +15,7 @@ class Home extends Component {
     if (postList) {
       return postList.map(post => (
         <PostContainer
-          key={post._id}
+          key={post.postId}
           post={post}
           history={history}
         />
@@ -38,7 +38,7 @@ Home.propTypes = {
   history: PropTypes.shape({}).isRequired,
   getPosts: PropTypes.func.isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    postId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

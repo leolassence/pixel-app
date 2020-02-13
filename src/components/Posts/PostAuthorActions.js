@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { isCurrentUserPost } from '../../helpers';
+import { isOwner } from '../../helpers';
 
 const PostAuthorActions = props => {
   const {
@@ -11,15 +11,14 @@ const PostAuthorActions = props => {
     history,
   } = props;
 
-  const handleClickDeletePost = () => deletePost(post._id, history);
+  const handleClickDeletePost = () => deletePost(post.postId, history);
 
-  if (isLoggedIn && isCurrentUserPost(props)) {
+  if (isOwner(isLoggedIn, post.user.username)) {
     const windowMessage = 'Are you sure you wish to delete this post ?';
 
-    // TODO fix <a href>
     return (
       <Fragment>
-        <Link to={`/updatepost/${post._id}`}>
+        <Link to={`/updatepost/${post.postId}`}>
           <span className="photo__icon">
             <i className="fa fa-edit" />
             &nbsp;
@@ -46,7 +45,10 @@ PostAuthorActions.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({}).isRequired,
   post: PropTypes.shape({
-    _id: PropTypes.string,
+    postId: PropTypes.string,
+    user: PropTypes.shape({
+      username: PropTypes.string,
+    }).isRequired,
   }).isRequired,
   deletePost: PropTypes.func.isRequired,
 };

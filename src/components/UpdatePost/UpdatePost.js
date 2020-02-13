@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PostFormContainer from '../PostForm';
+import _ from 'lodash';
+import PostForm from '../PostForm';
+import { isOwner } from '../../helpers';
 
 class UpdatePost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { editReady: false };
-  }
-
   componentDidMount() {
     const {
       match: {
@@ -18,41 +14,39 @@ class UpdatePost extends Component {
       getPost,
     } = this.props;
 
-    getPost(postId).then(({ payload }) => {
-      // TODO helper to manage this
-      if (payload.user.username === localStorage.getItem('username')) {
-        this.setState({
-          editReady: true,
-          post: {
-            postId,
-            title: payload.title,
-            location: payload.location,
-            description: payload.description,
-            coverImage: payload.coverImage,
-          }
-        });
-      } else {
-        this.setState({ editReady: false });
-        history.push('/notfound');
-      }
-    });
+    getPost(postId, history);
   }
 
   handleSubmit = ({ data, formData }) => {
-    const { history, updatePost } = this.props;
-    const { post: { postId } } = this.state;
+    const {
+      history,
+      updatePost,
+      post: { postId },
+    } = this.props;
 
     updatePost({ postId, data, formData }, history);
   }
 
-  render() {
-    const { post, editReady } = this.state;
+  shouldComponentRender() {
+    const { post, history } = this.props;
 
-    if (editReady) {
+    if (!_.isEmpty(post)) {
+      if (!isOwner(true, post.user.username)) history.push('/notfound');
+      return true;
+    }
+
+    return false;
+  }
+
+  render() {
+    const { post } = this.props;
+
+    if (this.shouldComponentRender()) {
       return (
-        <PostFormContainer
+        <PostForm
           handleSubmit={this.handleSubmit}
           post={post}
+          user={post.user}
         />
       );
     }
@@ -73,10 +67,15 @@ UpdatePost.propTypes = {
   updatePost: PropTypes.func.isRequired,
   getPost: PropTypes.func.isRequired,
   post: PropTypes.shape({
+    postId: PropTypes.string,
     title: PropTypes.string,
     location: PropTypes.string,
     description: PropTypes.string,
     coverImage: PropTypes.string,
+    user: PropTypes.shape({
+      username: PropTypes.string,
+      profileImage: PropTypes.string,
+    }),
   }).isRequired,
 };
 

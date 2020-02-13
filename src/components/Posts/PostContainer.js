@@ -5,7 +5,7 @@ import Post from './Post';
 import { deletePost } from '../../actions';
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.authentification.isLoggedIn,
+  isLoggedIn: state.authentification.isLoggedIn
 });
 
 const mapDispatchToProps = dispatch => ({

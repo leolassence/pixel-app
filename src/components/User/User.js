@@ -9,13 +9,15 @@ class Profile extends Component {
       match: {
         params: { username }
       },
-      history
+      history,
+      getUser,
+      getPosts,
     } = this.props;
 
     if (!username) history.push('/notfound');
 
-    this.props.getUser({ username }).then(() => {
-      this.props.getPosts({ userId: this.props.user.userId }, { limit: 12 });
+    getUser({ username }).then(() => {
+      getPosts({ userId: this.props.user.userId }, { limit: 12 });
     });
   }
 
@@ -56,7 +58,7 @@ Profile.propTypes = {
     bio: PropTypes.string,
   }).isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    postId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

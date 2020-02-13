@@ -16,7 +16,7 @@ class UserRenderPosts extends Component {
 
       return postList.map(post => (
         <ProfilePost
-          key={post._id}
+          key={post.postId}
           post={post}
           history={history}
         />
@@ -50,7 +50,7 @@ UserRenderPosts.propTypes = {
     bio: PropTypes.string,
   }).isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    postId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

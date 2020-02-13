@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { uid } from 'react-uid';
 import { Comment } from '../Comments';
 
 const PostRenderComments = props => {
   const { comments } = props;
 
-  // TODO UID
   return comments.map(c => (
     <Comment
-      key={Math.random().toString(36).substr(2, 9)}
+      key={uid(c)}
       username={c.username}
       message={c.message}
     />

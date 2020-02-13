@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ProfilePost = ({ post }) => (
-  <Link to={`/post/${post._id}`} className="col-md-4 thumbnail profile-picture">
+  <Link to={`/post/${post.postId}`} className="col-md-4 thumbnail profile-picture">
     <img
       src={post.coverImage}
       alt={post.title}
@@ -24,7 +24,7 @@ const ProfilePost = ({ post }) => (
 
 ProfilePost.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    postId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
