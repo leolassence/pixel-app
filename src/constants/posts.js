@@ -4,4 +4,5 @@ export default {
   UPDATE_POST: 'UPDATE_POST',
   GET_POSTS: 'GET_POSTS',
   DELETE_POST: 'DELETE_POST',
+  LIKE_POST: 'LIKE_POST',
 };

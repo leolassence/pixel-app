@@ -152,10 +152,36 @@ function deletePost(postId, history) {
   };
 }
 
+
+function likePost(postId) {
+  return async dispatch => {
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          authorization: localStorage.getItem('token')
+        },
+        url: `${API_ENDPOINT}/posts/like/${postId}`
+      });
+
+      if (!data.likedPost) return dispatch(parseError('Internal server Error'));
+
+      return dispatch({
+        type: POST_ACTIONS.LIKE_POST,
+        payload: data.likedPost
+      });
+    } catch (error) {
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
+    }
+  };
+}
+
 export {
   createPost,
   updatePost,
   getPost,
   getPosts,
-  deletePost
+  deletePost,
+  likePost,
 };

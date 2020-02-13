@@ -4,6 +4,7 @@ import PostAuthorActions from './PostAuthorActions';
 import PostHeader from './PostHeader';
 import PostRenderComments from './PostRenderComments';
 import PostCommentForm from './PostCommentForm';
+import PostLike from './PostLike';
 
 const Post = props => {
   const {
@@ -11,6 +12,7 @@ const Post = props => {
     isLoggedIn,
     history,
     deletePost,
+    likePost,
   } = props;
 
   return (
@@ -18,10 +20,12 @@ const Post = props => {
       <PostHeader post={post} />
       <div className="photo__info">
         <div className="photo__icons">
-          <span className="photo__icon">
-            <i className="fa fa-heart heart" />
-            &nbsp;
-          </span>
+          <PostLike
+            likePost={likePost}
+            postId={post.postId}
+            likes={post.likes}
+            isLoggedIn={isLoggedIn}
+          />
           <PostAuthorActions
             post={post}
             isLoggedIn={isLoggedIn}
@@ -29,7 +33,7 @@ const Post = props => {
             history={history}
           />
         </div>
-        <span className="photo__likes">35 likes</span>
+        <span className="photo__likes">{post.likeCount}</span>
         <ul className="photo__comments">
           <li className="photo__comment">
             <span className="photo__comment-author">{post.user.username}</span>
@@ -58,6 +62,7 @@ Post.propTypes = {
     location: PropTypes.string,
     description: PropTypes.string,
     coverImage: PropTypes.string,
+    likeCount: PropTypes.number,
     user: PropTypes.shape({
       username: PropTypes.string,
       profileImage: PropTypes.string,
@@ -68,8 +73,10 @@ Post.propTypes = {
         message: PropTypes.string,
       })
     ),
+    likes: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  deletePost: PropTypes.func.isRequired
+  deletePost: PropTypes.func.isRequired,
+  likePost: PropTypes.func.isRequired,
 };
 
 export default Post;
