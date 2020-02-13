@@ -1,12 +1,17 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createPost } from '../../actions';
+import { createPost, getUser } from '../../actions';
 import CreatePost from './CreatePost';
+
+const mapStateToProps = state => ({
+  user: state.users.user,
+});
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    createPost
+    createPost,
+    getUser,
   }, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(CreatePost);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

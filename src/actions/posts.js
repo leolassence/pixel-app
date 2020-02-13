@@ -22,7 +22,7 @@ function getPosts(query, options) {
   };
 }
 
-function getPost(postId) {
+function getPost(postId, history) {
   return async dispatch => {
     try {
       const { data } = await axios.get(`${API_ENDPOINT}/posts/${postId}`);
@@ -35,7 +35,8 @@ function getPost(postId) {
       });
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));
-      return dispatch(parseError(error.response.data.message));
+      dispatch(parseError(error.response.data.message));
+      return history.push('/notfound');
     }
   };
 }

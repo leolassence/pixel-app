@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import defaultProfileImage from '../../assets/images/user.png';
+import ProfileImageResolver from '../Common';
 
 const UserInfos = ({ user }) => (
   <header className="profile__header">
     <div className="profile__avatar-container">
-      <img
-        src={user.profileImage ? user.profileImage : defaultProfileImage}
-        className="profile__avatar"
-        alt="user img"
+      <ProfileImageResolver
+        profileImage={user.profileImage}
+        imgClassName="profile__avatar"
+        imgAlt={user.username}
       />
     </div>
     <div className="profile__info">

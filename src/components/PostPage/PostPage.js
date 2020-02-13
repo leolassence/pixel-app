@@ -8,10 +8,11 @@ class PostPage extends Component {
       match: {
         params: { postId }
       },
-      getPost
+      getPost,
+      history,
     } = this.props;
 
-    getPost(postId);
+    getPost(postId, history);
   }
 
   renderPost = () => {

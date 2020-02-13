@@ -1,13 +1,7 @@
-function isCurrentUserPost(props) {
-  const { isLoggedIn, post } = props;
-
+function isOwner(isLoggedIn, username) {
   const currentUser = localStorage.getItem('username');
 
-  if (isLoggedIn && post.user.username === currentUser) {
-    return true;
-  }
-
-  return false;
+  return isLoggedIn && username === currentUser;
 }
 
 function redirectPathResolver(location) {
@@ -17,6 +11,6 @@ function redirectPathResolver(location) {
 }
 
 module.exports = {
-  isCurrentUserPost,
-  redirectPathResolver
+  isOwner,
+  redirectPathResolver,
 };
