@@ -1,14 +1,23 @@
-## React/Redux authentification boilerplate
+### READ_ME WIP
 
-Minimal React/Redux app to use as a boilerplate
+### TODO
+- like post
 
-### Features:
-- SignIn
-- SignUp
-- SignOut
+- selectors:
+  - like count
+  - comment count 
+  - post count
+  - followers / following
 
-### Using
-- Token authentification with jwt
+- follow / unfollow
 
-Working with https://github.com/leolassence/node-auth-app
-# pixel-app
+- image management: display image on upload 
+  server: resize image in 1080p max size 2MO
+  find a way to store images by the of a free cdn or in mongodb
+ 
+- manage errors from server
+
+- search: users / posts
+  On first keyUp: display result view in an view component
+
+- Unit tests
