@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import HeaderAuthenticateLinks from './HeaderAuthenticateLinks';
 import logo from '../../assets/images/logo.png';
+import { Search } from '../Search';
 
 const Header = props => {
-  const { isLoggedIn, signOutUser } = props;
+  const {
+    isLoggedIn,
+    signOutUser,
+    search,
+    location,
+    history,
+  } = props;
 
   return (
     <nav className="navigation">
@@ -17,10 +24,11 @@ const Header = props => {
           className="navigation__logo"
         />
       </Link>
-      <div className="navigation__search-container">
-        <i className="fa fa-search" />
-        <input type="text" placeholder="Search" />
-      </div>
+      <Search
+        location={location}
+        history={history}
+        search={search}
+      />
       <div className="navigation__icons">
         <HeaderAuthenticateLinks
           isLoggedIn={isLoggedIn}
@@ -33,7 +41,14 @@ const Header = props => {
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  signOutUser: PropTypes.func.isRequired
+  signOutUser: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
 };
 
 export default Header;
