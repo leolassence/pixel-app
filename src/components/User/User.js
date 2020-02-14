@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import UserInfos from './UserInfos';
 import UserRenderPosts from './UserRenderPosts';
 
@@ -12,34 +13,55 @@ class Profile extends Component {
       history,
       getUser,
       getPosts,
+      user,
     } = this.props;
 
     if (!username) history.push('/notfound');
 
     getUser({ username }).then(() => {
-      getPosts({ userId: this.props.user.userId }, { limit: 12 });
+      getPosts({ userId: user.userId }, { limit: 12 });
     });
   }
 
-render() {
-  const { user, postList, history } = this.props;
+  shouldComponentRender() {
+    const { postList, user } = this.props;
+    return (postList && !_.isEmpty(user));
+  }
 
-  return (
-    <main className="profile-container">
-      <section className="profile">
-        <UserInfos user={user} />
-        <UserRenderPosts
-          postList={postList}
-          user={user}
-          history={history}
-        />
-      </section>
-    </main>
-    );
+  render() {
+    const {
+      user,
+      postList,
+      history,
+      followUser,
+      isLoggedIn,
+    } = this.props;
+
+    if (this.shouldComponentRender()) {
+      return (
+        <main className="profile-container">
+          <section className="profile">
+            <UserInfos
+              user={user}
+              isLoggedIn={isLoggedIn}
+              followUser={followUser}
+            />
+            <UserRenderPosts
+              postList={postList}
+              user={user}
+              history={history}
+            />
+          </section>
+        </main>
+      );
+    }
+
+    return null;
   }
 }
 
 Profile.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired
@@ -50,6 +72,7 @@ Profile.propTypes = {
   }).isRequired,
   getUser: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
+  followUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string,
     username: PropTypes.string,

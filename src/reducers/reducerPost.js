@@ -5,8 +5,6 @@ import {
 
 const initialState = {
   post: {},
-  createdPost: {},
-  updatedPost: {},
   postList: []
 };
 
@@ -19,33 +17,52 @@ export default function PostReducer(state = initialState, action) {
       };
     }
     case POST_ACTIONS.GET_POST: {
+      const newPost = action.payload;
+
       return {
         ...state,
-        post: action.payload
-      };
-    }
-    case POST_ACTIONS.CREATE_POST: {
-      return {
-        ...state,
-        createdPost: action.payload
-      };
-    }
-    case POST_ACTIONS.UPDATE_POST: {
-      return {
-        ...state,
-        updatedPost: action.payload
-      };
-    }
-    case POST_ACTIONS.DELETE_POST: {
-      return {
-        ...state,
-        postList: state.postList.filter(
-          post => post.postId === action.payload.deletedPostId ? null : true
+        post: newPost,
+        postList: state.postList.map(
+          post => [newPost].find(i => post.postId === i.postId) || post
         ),
       };
     }
+    case POST_ACTIONS.CREATE_POST: {
+      const createdPost = action.payload;
+
+      return {
+        ...state,
+        post: action.payload,
+        postList: [
+          ...state.postList,
+          createdPost,
+        ],
+      };
+    }
+    case POST_ACTIONS.UPDATE_POST: {
+      const updatedPost = action.payload;
+
+      return {
+        ...state,
+        post: updatedPost,
+        postList: state.postList.map(
+          post => [updatedPost].find(i => post.postId === i.postId) || post
+        ),
+      };
+    }
+    case POST_ACTIONS.DELETE_POST: {
+      const deletedPostId = action.payload;
+
+      return {
+        ...state,
+        postList: state.postList.filter(
+          post => post.postId === deletedPostId ? null : true
+        ),
+        post: state.post.postId === deletedPostId ? {} : state.post,
+      };
+    }
     case COMMENT_ACTIONS.CREATE_COMMENT: {
-      const { updatedPost } = action.payload;
+      const updatedPost = action.payload;
 
       return {
         ...state,
