@@ -36,10 +36,10 @@
   transition: all .5s ease-in-out;
 }
 
-.profile__button:hover{
+/* .profile__button:hover{
   color:white;
-  background-color:  #3897f0;
-}
+  background-color: #3897f0;
+} */
 
 .profile__info{
   width: 70%;
@@ -230,23 +230,24 @@ opacity: 1;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 12px;
-  background-color: #4f4f4f;
-  color: white;
+  color: black;
 }
 
-.tab.active {
+.btn-follow {
   background-color: #3897f0;
   color: white;
+  transition: none;
 }
 
-.tab:hover {
-  background-color: #3897f0;
-  color: white;
+.btn-unfollow {
+  background-color: #fff;
+  color: black;
 }
 
 .jumbotron {
   background-color: #ffffff;
   color: #4f4f4f;
+  transition: none;
 }
 
 .jumbotron h1 {

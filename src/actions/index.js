@@ -8,6 +8,7 @@ import {
 import {
   getUser,
   updateUser,
+  followUser,
 } from './users';
 
 import {
@@ -39,6 +40,7 @@ export {
   likePost,
   getPost,
   updateUser,
+  followUser,
   getPosts,
   deletePost,
   createComment,
