@@ -7,7 +7,7 @@ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 function createComment({ message, postId }) {
   return async dispatch => {
     try {
-      const { data } = await axios({
+      const { data: { updatedPost } } = await axios({
         method: 'post',
         headers: {
           authorization: localStorage.getItem('token')
@@ -16,11 +16,11 @@ function createComment({ message, postId }) {
         data: { message }
       });
 
-      if (!data.updatedPost) return dispatch(parseError('Internal server Error'));
+      if (!updatedPost) return dispatch(parseError('Internal server Error'));
 
       return dispatch({
         type: COMMENT_ACTIONS.CREATE_COMMENT,
-        payload: data
+        payload: updatedPost
       });
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));

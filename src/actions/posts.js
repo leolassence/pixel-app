@@ -59,7 +59,7 @@ function createPost({ formData, data }, history) {
 
       if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
 
-      const { data: { postId } } = await axios({
+      const { data: { createdPost } } = await axios({
         ...requestConfig,
         url: `${API_ENDPOINT}/posts`,
         data: {
@@ -68,14 +68,14 @@ function createPost({ formData, data }, history) {
         }
       });
 
-      if (!postId) return dispatch(parseError('Internal server Error'));
+      if (!createdPost) return dispatch(parseError('Internal server Error'));
 
       dispatch({
         type: POST_ACTIONS.CREATE_POST,
-        payload: postId
+        payload: createdPost
       });
 
-      return history.push(`/post/${postId}`);
+      return history.push(`/post/${createdPost.postId}`);
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));
       return dispatch(parseError(error.response.data.message));
@@ -101,7 +101,7 @@ function updatePost({ postId, formData, data }, history) {
 
       if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
 
-      const { data: { postId: updatedPostId } } = await axios({
+      const { data: { updatedPost } } = await axios({
         method: 'put',
         ...requestConfig,
         url: `${API_ENDPOINT}/posts/${postId}`,
@@ -111,14 +111,14 @@ function updatePost({ postId, formData, data }, history) {
         }
       });
 
-      if (!updatedPostId) return dispatch(parseError('Internal server Error'));
+      if (!updatedPost) return dispatch(parseError('Internal server Error'));
 
       dispatch({
         type: POST_ACTIONS.UPDATE_POST,
-        payload: updatedPostId
+        payload: updatedPost
       });
 
-      return history.push(`/post/${updatedPostId}`);
+      return history.push(`/post/${updatedPost.postId}`);
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));
       return dispatch(parseError(error.response.data.message));
@@ -129,7 +129,7 @@ function updatePost({ postId, formData, data }, history) {
 function deletePost(postId, history) {
   return async dispatch => {
     try {
-      const { data } = await axios({
+      const { data: { deletedPostId } } = await axios({
         method: 'delete',
         headers: {
           authorization: localStorage.getItem('token')
@@ -137,11 +137,11 @@ function deletePost(postId, history) {
         url: `${API_ENDPOINT}/posts/${postId}`
       });
 
-      if (!data) return dispatch(parseError('Internal server Error'));
+      if (!deletedPostId) return dispatch(parseError('Internal server Error'));
 
       dispatch({
         type: POST_ACTIONS.DELETE_POST,
-        payload: data
+        payload: deletedPostId
       });
 
       return history.push('/');
@@ -156,7 +156,7 @@ function deletePost(postId, history) {
 function likePost(postId) {
   return async dispatch => {
     try {
-      const { data } = await axios({
+      const { data: { likedPost } } = await axios({
         method: 'put',
         headers: {
           authorization: localStorage.getItem('token')
@@ -164,11 +164,11 @@ function likePost(postId) {
         url: `${API_ENDPOINT}/posts/like/${postId}`
       });
 
-      if (!data.likedPost) return dispatch(parseError('Internal server Error'));
+      if (!likedPost) return dispatch(parseError('Internal server Error'));
 
       return dispatch({
         type: POST_ACTIONS.LIKE_POST,
-        payload: data.likedPost
+        payload: likedPost
       });
     } catch (error) {
       if (!error.response) return dispatch(parseError('Server not responding'));

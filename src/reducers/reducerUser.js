@@ -18,6 +18,12 @@ export default function UserReducer(state = initialState, action) {
         user: action.payload
       };
     }
+    case USER_ACTIONS.FOLLOW_USER: {
+      return {
+        ...state,
+        user: action.payload
+      };
+    }
     default: {
       return state;
     }

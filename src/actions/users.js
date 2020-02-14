@@ -65,7 +65,33 @@ function updateUser({ userId, formData, data }, history) {
   };
 }
 
+function followUser(userId) {
+  return async dispatch => {
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          authorization: localStorage.getItem('token')
+        },
+        url: `${API_ENDPOINT}/users/follow/${userId}`
+      });
+
+      if (!data.followedUser) return dispatch(parseError('Internal server Error'));
+
+      return dispatch({
+        type: USER_ACTIONS.FOLLOW_USER,
+        payload: data.followedUser,
+      });
+    } catch (error) {
+      if (!error.response) return dispatch(parseError('Server not responding'));
+      return dispatch(parseError(error.response.data.message));
+    }
+  };
+}
+
+
 export {
   getUser,
   updateUser,
+  followUser,
 };
