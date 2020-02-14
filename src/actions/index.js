@@ -26,8 +26,10 @@ import {
 } from './posts';
 
 import createComment from './comments';
+import search from './search';
 
 export {
+  search,
   parseError,
   resetError,
   setAuthentification,

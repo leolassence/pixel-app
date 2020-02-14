@@ -12,10 +12,12 @@ const ProfilePost = ({ post }) => (
     <div className="profile-picture__overlay">
       <span className="profile-picture__number">
         <i className="fa fa-heart" />
+        &nbsp;
         {post.likeCount}
       </span>
       <span className="profile-picture__number">
         <i className="fa fa-comment" />
+        &nbsp;
         {post.commentCount}
       </span>
     </div>

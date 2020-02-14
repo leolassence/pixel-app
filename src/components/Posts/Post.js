@@ -37,13 +37,17 @@ const Post = props => {
         <ul className="photo__comments">
           <li className="photo__comment">
             <span className="photo__comment-author">{post.user.username}</span>
+            <strong>{post.title}</strong>
+          </li>
+          <li className="photo__comment">
             {post.description}
           </li>
         </ul>
+        <span className="photo__time-ago">10 hours ago</span>
+        {post.comments.length ? <hr className="post_comments_hr" /> : null}
         <ul className="photo__comments">
           <PostRenderComments comments={post.comments} />
         </ul>
-        <span className="photo__time-ago">10 hours ago</span>
         <PostCommentForm
           isLoggedIn={isLoggedIn}
           postId={post.postId}

@@ -19,6 +19,7 @@ import UpdateUserContainer from '../components/UpdateUser';
 import CreatePostContainer from '../components/CreatePost';
 import UpdatePostContainer from '../components/UpdatePost';
 import PostPageContainer from '../components/PostPage';
+import { SearchContainer } from '../components/Search';
 import NotFound from '../components/NotFound';
 import RequireAuth from '../components/HOC';
 
@@ -35,6 +36,7 @@ export default (
       <Route exact path="/signup" component={SignUpContainer} />
       <Route exact path="/createpost" component={RequireAuth(CreatePostContainer)} />
       <Route exact path="/updatepost/:postId" component={RequireAuth(UpdatePostContainer)} />
+      <Route exact path="/search" component={SearchContainer} />
       <Route path="/notfound" component={NotFound} />
       <Redirect from="*" to="/notfound" />
     </Switch>
