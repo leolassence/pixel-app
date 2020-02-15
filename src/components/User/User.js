@@ -13,13 +13,12 @@ class Profile extends Component {
       history,
       getUser,
       getPosts,
-      user,
     } = this.props;
 
     if (!username) history.push('/notfound');
 
-    getUser({ username }).then(() => {
-      getPosts({ userId: user.userId }, { limit: 12 });
+    getUser({ username }).then(({ payload }) => {
+      getPosts({ userId: payload.userId }, { limit: 12 });
     });
   }
 
