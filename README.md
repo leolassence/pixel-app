@@ -2,4 +2,6 @@
 
 Pixel app is a personal project, where I experiment new librairies and architechtures.
 
-It's based on React and Redux
+#### Using React and Redux
+
+Working with pixel-server: https://github.com/leolassence/pixel-server
