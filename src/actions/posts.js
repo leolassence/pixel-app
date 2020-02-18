@@ -1,15 +1,11 @@
-import axios from 'axios';
+import api from '../api';
 import { POST_ACTIONS } from '../constants';
 import { parseError } from './errors';
-
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 function getPosts(query, options) {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_ENDPOINT}/posts`, {
-        params: { query, options }
-      });
+      const { data } = await api.posts.getPosts({ query, options });
 
       return dispatch({
         type: POST_ACTIONS.GET_POSTS,
@@ -25,7 +21,7 @@ function getPosts(query, options) {
 function getPost(postId, history) {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_ENDPOINT}/posts/${postId}`);
+      const { data } = await api.posts.getPost({ postId });
 
       if (!data) return dispatch(parseError('Internal server Error'));
 
@@ -44,29 +40,11 @@ function getPost(postId, history) {
 function createPost({ formData, data }, history) {
   return async dispatch => {
     try {
-      const requestConfig = {
-        method: 'post',
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-      };
-
-      const { data: { imageId } } = await axios({
-        ...requestConfig,
-        url: `${API_ENDPOINT}/images`,
-        data: formData,
-      });
+      const { data: { imageId } } = await api.images.createImage({ formData });
 
       if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
 
-      const { data: { createdPost } } = await axios({
-        ...requestConfig,
-        url: `${API_ENDPOINT}/posts`,
-        data: {
-          ...data,
-          imageId
-        }
-      });
+      const { data: { createdPost } } = await api.posts.createPost({ data, imageId });
 
       if (!createdPost) return dispatch(parseError('Internal server Error'));
 
@@ -86,29 +64,14 @@ function createPost({ formData, data }, history) {
 function updatePost({ postId, formData, data }, history) {
   return async dispatch => {
     try {
-      const requestConfig = {
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-      };
-
-      const { data: { imageId } } = await axios({
-        method: 'post',
-        ...requestConfig,
-        url: `${API_ENDPOINT}/images`,
-        data: formData,
-      });
+      const { data: { imageId } } = await api.images.createImage({ formData });
 
       if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
 
-      const { data: { updatedPost } } = await axios({
-        method: 'put',
-        ...requestConfig,
-        url: `${API_ENDPOINT}/posts/${postId}`,
-        data: {
-          ...data,
-          imageId
-        }
+      const { data: { updatedPost } } = await api.posts.updatePost({
+        data,
+        imageId,
+        postId
       });
 
       if (!updatedPost) return dispatch(parseError('Internal server Error'));
@@ -129,13 +92,7 @@ function updatePost({ postId, formData, data }, history) {
 function deletePost(postId, history) {
   return async dispatch => {
     try {
-      const { data: { deletedPostId } } = await axios({
-        method: 'delete',
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-        url: `${API_ENDPOINT}/posts/${postId}`
-      });
+      const { data: { deletedPostId } } = await api.posts.deletePost({ postId });
 
       if (!deletedPostId) return dispatch(parseError('Internal server Error'));
 
@@ -152,17 +109,10 @@ function deletePost(postId, history) {
   };
 }
 
-
 function likePost(postId) {
   return async dispatch => {
     try {
-      const { data: { likedPost } } = await axios({
-        method: 'put',
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-        url: `${API_ENDPOINT}/posts/like/${postId}`
-      });
+      const { data: { likedPost } } = await api.posts.likePost({ postId });
 
       if (!likedPost) return dispatch(parseError('Internal server Error'));
 

@@ -1,17 +1,11 @@
-import axios from 'axios';
+import api from '../api';
 import { SEARCH_ACTIONS } from '../constants';
 import { parseError } from './errors';
-
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 function search(query) {
   return async dispatch => {
     try {
-      const { data } = await axios({
-        method: 'post',
-        url: `${API_ENDPOINT}/search`,
-        data: { searchQuery: query },
-      });
+      const { data } = await api.search.search({ query });
 
       return dispatch({
         type: SEARCH_ACTIONS.SEARCH,

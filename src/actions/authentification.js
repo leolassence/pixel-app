@@ -1,9 +1,6 @@
-import axios from 'axios';
+import api from '../api';
 import { AUTH_ACTIONS } from '../constants';
 import { parseError } from './errors';
-
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-
 
 function setAuthentification(isLoggedIn) {
   return {
@@ -15,9 +12,9 @@ function setAuthentification(isLoggedIn) {
 function signInUser({ signInId, password }, history) {
   return async dispatch => {
     try {
-      const response = await axios.post(`${API_ENDPOINT}/auth/signIn`, {
+      const response = await api.authentification.signin({
         signInId,
-        password
+        password,
       });
 
       localStorage.setItem('token', response.data.token);
@@ -36,7 +33,7 @@ function signInUser({ signInId, password }, history) {
 function signUpUser({ email, username, password }, history) {
   return async dispatch => {
     try {
-      const response = await axios.post(`${API_ENDPOINT}/auth/signUp`, {
+      const response = await api.authentification.signup({
         email,
         username,
         password,

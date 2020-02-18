@@ -1,15 +1,11 @@
-import axios from 'axios';
 import { USER_ACTIONS } from '../constants';
 import { parseError } from './errors';
-
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+import api from '../api';
 
 function getUser({ username }) {
   return async dispatch => {
     try {
-      const response = await axios.get(`${API_ENDPOINT}/users`, {
-        params: { username }
-      });
+      const response = await api.users.getUser({ username });
 
       return dispatch({
         type: USER_ACTIONS.GET_USER,
@@ -25,29 +21,14 @@ function getUser({ username }) {
 function updateUser({ userId, formData, data }, history) {
   return async dispatch => {
     try {
-      const requestConfig = {
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-      };
-
-      const { data: { imageId } } = await axios({
-        method: 'post',
-        ...requestConfig,
-        url: `${API_ENDPOINT}/images`,
-        data: formData,
-      });
+      const { data: { imageId } } = await api.images.createImage({ formData });
 
       if (!imageId) return dispatch(parseError('Internal server Error Image not created'));
 
-      const { data: { updatedUser } } = await axios({
-        method: 'put',
-        ...requestConfig,
-        url: `${API_ENDPOINT}/users/${userId}`,
-        data: {
-          ...data,
-          imageId
-        }
+      const { data: { updatedUser } } = await api.users.updateUser({
+        userId,
+        imageId,
+        data
       });
 
       if (!updatedUser) return dispatch(parseError('Internal server Error'));
@@ -68,13 +49,7 @@ function updateUser({ userId, formData, data }, history) {
 function followUser(userId) {
   return async dispatch => {
     try {
-      const { data } = await axios({
-        method: 'put',
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-        url: `${API_ENDPOINT}/users/follow/${userId}`
-      });
+      const { data } = await api.users.followUser({ userId });
 
       if (!data.followedUser) return dispatch(parseError('Internal server Error'));
 

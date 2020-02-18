@@ -1,19 +1,13 @@
-import axios from 'axios';
+import api from '../api';
 import { COMMENT_ACTIONS } from '../constants';
 import { parseError } from './errors';
-
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 function createComment({ message, postId }) {
   return async dispatch => {
     try {
-      const { data: { updatedPost } } = await axios({
-        method: 'post',
-        headers: {
-          authorization: localStorage.getItem('token')
-        },
-        url: `${API_ENDPOINT}/posts/comment/${postId}`,
-        data: { message }
+      const { data: { updatedPost } } = await api.comments.createComment({
+        postId,
+        message,
       });
 
       if (!updatedPost) return dispatch(parseError('Internal server Error'));
