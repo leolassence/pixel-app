@@ -1,23 +1,9 @@
-### READ_ME WIP
+## Pixel App
 
-### TODO
-- like post
+Pixel app is a personal project, where I experiment new librairies and architechtures.
 
-- selectors:
-  - like count
-  - comment count 
-  - post count
-  - followers / following
+#### Using React and Redux
 
-- follow / unfollow
+Working with pixel-server: https://github.com/leolassence/pixel-server
 
-- image management: display image on upload 
-  server: resize image in 1080p max size 2MO
-  find a way to store images by the of a free cdn or in mongodb
- 
-- manage errors from server
-
-- search: users / posts
-  On first keyUp: display result view in an view component
-
-- Unit tests
+PS: development is still in progress
