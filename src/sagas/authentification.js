@@ -5,8 +5,10 @@ import {
   put,
   takeEvery,
 } from 'redux-saga/effects';
+
 import api from '../api';
 import { setAuthentification } from '../actions/authentification';
+import { parseError } from '../actions/errors';
 import { AUTH_ACTIONS } from '../constants';
 
 function* signInUser(action) {
@@ -25,7 +27,9 @@ function* signInUser(action) {
     // TODO replace maybe by "connected-react-router"
     yield history.push(`/user/${localStorage.getItem('username')}`);
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -56,7 +60,9 @@ function* signUpUser(action) {
     // TODO replace maybe by "connected-react-router"
     yield history.push(`/user/${localStorage.getItem('username')}`);
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -73,7 +79,9 @@ function* signOutUser(action) {
     // TODO replace maybe by "connected-react-router"
     yield action.payload.history.push('/');
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 

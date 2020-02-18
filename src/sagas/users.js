@@ -13,6 +13,7 @@ import {
 } from '../actions/users';
 
 import api from '../api';
+import { parseError } from '../actions/errors';
 import { USER_ACTIONS } from '../constants';
 
 
@@ -26,7 +27,9 @@ function* getUser(action) {
 
     yield put(getUserSuccess(response.data));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -58,7 +61,9 @@ function* updateUser(action) {
 
     yield history.push(`/user/${localStorage.getItem('username')}`);
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -77,7 +82,9 @@ function* followUser(action) {
 
     yield put(followUserSuccess(followedUser));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
