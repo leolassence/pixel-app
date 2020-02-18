@@ -1,8 +1,8 @@
 export default {
-  GET_POST: 'GET_POST',
-  CREATE_POST: 'CREATE_POST',
-  UPDATE_POST: 'UPDATE_POST',
-  GET_POSTS: 'GET_POSTS',
-  DELETE_POST: 'DELETE_POST',
-  LIKE_POST: 'LIKE_POST',
+  GET_POST: 'posts/get-post',
+  GET_POSTS: 'posts/get-posts',
+  CREATE_POST: 'posts/create-post',
+  UPDATE_POST: 'posts/update-post',
+  DELETE_POST: 'posts/delete-posts',
+  LIKE_POST: 'posts/like-post',
 };

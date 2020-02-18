@@ -1,4 +1,3 @@
 export default {
-  SET_AUTHENTIFICATIONS: 'SET_AUTHENTIFICATIONS',
-  PARSE_MESSAGE: 'PARSE_MESSAGE',
+  SET_AUTHENTIFICATIONS: 'authentifications/set-authentification',
 };
