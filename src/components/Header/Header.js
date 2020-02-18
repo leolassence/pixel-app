@@ -8,7 +8,7 @@ import { Search } from '../Search';
 const Header = props => {
   const {
     isLoggedIn,
-    signOutUser,
+    signOutUserRequest,
     searchRequest,
     location,
     history,
@@ -32,7 +32,8 @@ const Header = props => {
       <div className="navigation__icons">
         <HeaderAuthenticateLinks
           isLoggedIn={isLoggedIn}
-          signOutUser={signOutUser}
+          history={history}
+          signOutUserRequest={signOutUserRequest}
         />
       </div>
     </nav>
@@ -41,7 +42,7 @@ const Header = props => {
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  signOutUser: PropTypes.func.isRequired,
+  signOutUserRequest: PropTypes.func.isRequired,
   searchRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

@@ -1,14 +1,14 @@
 import {
   setAuthentification,
-  signInUser,
-  signUpUser,
-  signOutUser
+  signInUserRequest,
+  signUpUserRequest,
+  signOutUserRequest,
 } from './authentification';
 
 import {
-  getUser,
-  updateUser,
-  followUser,
+  getUserRequest,
+  updateUserRequest,
+  followUserRequest,
 } from './users';
 
 import {
@@ -36,6 +36,8 @@ import {
 } from './search';
 
 export {
+  getUserRequest,
+  signOutUserRequest,
   createCommentRequest,
   createCommentSuccess,
   searchRequest,
@@ -43,16 +45,14 @@ export {
   parseError,
   resetError,
   setAuthentification,
-  signInUser,
-  signUpUser,
-  signOutUser,
-  getUser,
+  signInUserRequest,
+  signUpUserRequest,
   createPost,
   updatePost,
   likePost,
   getPost,
-  updateUser,
-  followUser,
+  updateUserRequest,
+  followUserRequest,
   getPosts,
   deletePost,
 };

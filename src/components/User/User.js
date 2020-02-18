@@ -5,45 +5,49 @@ import UserInfos from './UserInfos';
 import UserRenderPosts from './UserRenderPosts';
 
 class Profile extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     const {
       match: {
         params: { username }
       },
-      history,
-      getUser,
+      getUserRequest,
       getPosts,
     } = this.props;
 
-    if (!username) history.push('/notfound');
+    getUserRequest({ username });
+    // getPosts({ userId: user.userId }, { limit: 12 });
 
-    getUser({ username }).then(({ payload }) => {
-      getPosts({ userId: payload.userId }, { limit: 12 });
-    });
+    getPosts({}, { limit: 12 });
+  }
+
+  componentDidMount() {
+    // FIX userId: user.userId
   }
 
   shouldComponentRender() {
-    const { postList, user } = this.props;
+    const { user, postList } = this.props;
     return (postList && !_.isEmpty(user));
   }
 
   render() {
-    const {
-      user,
-      postList,
-      history,
-      followUser,
-      isLoggedIn,
-    } = this.props;
-
     if (this.shouldComponentRender()) {
+      const {
+        user,
+        postList,
+        history,
+        followUserRequest,
+        isLoggedIn,
+      } = this.props;
+
       return (
         <main className="profile-container">
           <section className="profile">
             <UserInfos
               user={user}
               isLoggedIn={isLoggedIn}
-              followUser={followUser}
+              followUserRequest={followUserRequest}
             />
             <UserRenderPosts
               postList={postList}
@@ -69,9 +73,9 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  getUser: PropTypes.func.isRequired,
+  getUserRequest: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
-  followUser: PropTypes.func.isRequired,
+  followUserRequest: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string,
     username: PropTypes.string,
