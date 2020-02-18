@@ -18,8 +18,10 @@ import { USER_ACTIONS } from '../constants';
 
 function* getUser(action) {
   try {
+    const { username } = action.payload;
+
     const response = yield call(api.users.getUser, {
-      username: action.payload.username,
+      username,
     });
 
     yield put(getUserSuccess(response.data));

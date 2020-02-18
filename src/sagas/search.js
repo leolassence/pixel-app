@@ -11,8 +11,9 @@ import { SEARCH_ACTIONS } from '../constants';
 
 function* search(action) {
   try {
+    const { query } = action.payload;
     const { data } = yield call(api.search.search, {
-      query: action.payload.query
+      query
     });
 
     yield put(searchSuccess(data));

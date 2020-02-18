@@ -7,10 +7,10 @@ const PostLike = props => {
     const {
       postId,
       isLoggedIn,
-      likePost,
+      likePostRequest,
     } = props;
 
-    if (isLoggedIn) return likePost(postId);
+    if (isLoggedIn) return likePostRequest(postId);
 
     return true;
   };
@@ -40,7 +40,7 @@ PostLike.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   postId: PropTypes.string.isRequired,
   likes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  likePost: PropTypes.func.isRequired,
+  likePostRequest: PropTypes.func.isRequired,
 };
 
 export default PostLike;

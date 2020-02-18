@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
-import { signOutUserRequest, searchRequest } from '../../actions';
+import { signOutUserRequest } from '../../actions/authentification';
+import { searchRequest } from '../../actions/search';
+
 import Header from './Header';
 
 const mapStateToProps = state => ({

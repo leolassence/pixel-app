@@ -10,13 +10,13 @@ const initialState = {
 
 export default function PostReducer(state = initialState, action) {
   switch (action.type) {
-    case POST_ACTIONS.GET_POSTS: {
+    case POST_ACTIONS.GET_POSTS_SUCCESS: {
       return {
         ...state,
         postList: action.payload
       };
     }
-    case POST_ACTIONS.GET_POST: {
+    case POST_ACTIONS.GET_POST_SUCCESS: {
       const newPost = action.payload;
 
       return {
@@ -27,7 +27,7 @@ export default function PostReducer(state = initialState, action) {
         ),
       };
     }
-    case POST_ACTIONS.CREATE_POST: {
+    case POST_ACTIONS.CREATE_POST_SUCCESS: {
       const createdPost = action.payload;
 
       return {
@@ -39,7 +39,7 @@ export default function PostReducer(state = initialState, action) {
         ],
       };
     }
-    case POST_ACTIONS.UPDATE_POST: {
+    case POST_ACTIONS.UPDATE_POST_SUCCESS: {
       const updatedPost = action.payload;
 
       return {
@@ -50,7 +50,7 @@ export default function PostReducer(state = initialState, action) {
         ),
       };
     }
-    case POST_ACTIONS.DELETE_POST: {
+    case POST_ACTIONS.DELETE_POST_SUCCESS: {
       const deletedPostId = action.payload;
 
       return {
@@ -72,7 +72,7 @@ export default function PostReducer(state = initialState, action) {
         post: state.post.postId === updatedPost.postId ? updatedPost : state.post,
       };
     }
-    case POST_ACTIONS.LIKE_POST: {
+    case POST_ACTIONS.LIKE_POST_SUCCESS: {
       const likedPost = action.payload;
 
       return {

@@ -11,20 +11,20 @@ class UpdatePost extends Component {
         params: { postId }
       },
       history,
-      getPost,
+      getPostRequest,
     } = this.props;
 
-    getPost(postId, history);
+    getPostRequest(postId, history);
   }
 
   handleSubmit = ({ data, formData }) => {
     const {
       history,
-      updatePost,
+      updatePostRequest,
       post: { postId },
     } = this.props;
 
-    updatePost({ postId, data, formData }, history);
+    updatePostRequest({ postId, data, formData }, history);
   }
 
   shouldComponentRender() {
@@ -64,8 +64,8 @@ UpdatePost.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  updatePost: PropTypes.func.isRequired,
-  getPost: PropTypes.func.isRequired,
+  updatePostRequest: PropTypes.func.isRequired,
+  getPostRequest: PropTypes.func.isRequired,
   post: PropTypes.shape({
     postId: PropTypes.string,
     title: PropTypes.string,

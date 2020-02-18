@@ -11,11 +11,11 @@ import { AUTH_ACTIONS } from '../constants';
 
 function* signInUser(action) {
   try {
-    const { payload } = action;
+    const { signInId, password, history } = action.payload;
 
     const response = yield call(api.authentification.signin, {
-      signInId: payload.signInId,
-      password: payload.password,
+      signInId,
+      password,
     });
 
     localStorage.setItem('token', response.data.token);
@@ -23,7 +23,7 @@ function* signInUser(action) {
 
     yield put(setAuthentification(true));
     // TODO replace maybe by "connected-react-router"
-    yield payload.history.push(`/user/${localStorage.getItem('username')}`);
+    yield history.push(`/user/${localStorage.getItem('username')}`);
   } catch (e) {
     console.log('E', e);
   }
@@ -36,12 +36,17 @@ function* watchSignInRequest() {
 
 function* signUpUser(action) {
   try {
-    const { payload } = action;
+    const {
+      email,
+      username,
+      password,
+      history,
+    } = action.payload;
 
     const response = yield call(api.authentification.signup, {
-      email: payload.email,
-      username: payload.username,
-      password: payload.password,
+      email,
+      username,
+      password,
     });
 
     localStorage.setItem('token', response.data.token);
@@ -49,7 +54,7 @@ function* signUpUser(action) {
 
     yield put(setAuthentification(true));
     // TODO replace maybe by "connected-react-router"
-    yield payload.history.push(`/user/${localStorage.getItem('username')}`);
+    yield history.push(`/user/${localStorage.getItem('username')}`);
   } catch (e) {
     console.log('E', e);
   }

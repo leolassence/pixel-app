@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import rootSaga from './sagas';
 import routes from './routes';
 import reducers from './reducers';
-import { setAuthentification } from './actions';
+import { setAuthentification } from './actions/authentification';
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 const invariant = require('redux-immutable-state-invariant').default();
 

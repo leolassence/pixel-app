@@ -3,6 +3,7 @@ import searchSagas from './search';
 import commentsSagas from './comments';
 import authentificationSagas from './authentification';
 import usersSagas from './users';
+import postsSagas from './posts';
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     ...commentsSagas,
     ...authentificationSagas,
     ...usersSagas,
+    ...postsSagas,
   ]);
 }

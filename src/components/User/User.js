@@ -13,13 +13,13 @@ class Profile extends Component {
         params: { username }
       },
       getUserRequest,
-      getPosts,
+      getPostsRequest,
     } = this.props;
 
     getUserRequest({ username });
-    // getPosts({ userId: user.userId }, { limit: 12 });
+    // getPostsRequest({ userId: user.userId }, { limit: 12 });
 
-    getPosts({}, { limit: 12 });
+    getPostsRequest({}, { limit: 12 });
   }
 
   componentDidMount() {
@@ -74,7 +74,7 @@ Profile.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   getUserRequest: PropTypes.func.isRequired,
-  getPosts: PropTypes.func.isRequired,
+  getPostsRequest: PropTypes.func.isRequired,
   followUserRequest: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string,

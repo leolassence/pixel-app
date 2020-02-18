@@ -4,9 +4,9 @@ import PostContainer from '../Posts';
 
 class Home extends Component {
   componentDidMount() {
-    const { getPosts } = this.props;
+    const { getPostsRequest } = this.props;
 
-    getPosts({}, { limit: 10 });
+    getPostsRequest({}, { limit: 10 });
   }
 
   renderPosts = () => {
@@ -36,7 +36,7 @@ class Home extends Component {
 
 Home.propTypes = {
   history: PropTypes.shape({}).isRequired,
-  getPosts: PropTypes.func.isRequired,
+  getPostsRequest: PropTypes.func.isRequired,
   postList: PropTypes.arrayOf(PropTypes.shape({
     postId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,

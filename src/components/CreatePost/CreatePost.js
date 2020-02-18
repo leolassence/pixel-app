@@ -12,9 +12,9 @@ class CreatePost extends Component {
   }
 
   handleSubmit = ({ data, formData }) => {
-    const { createPost, history } = this.props;
+    const { createPostRequest, history } = this.props;
 
-    createPost({ data, formData }, history);
+    createPostRequest({ data, formData }, history);
   }
 
   shouldComponentRender() {
@@ -40,7 +40,7 @@ class CreatePost extends Component {
 }
 
 CreatePost.propTypes = {
-  createPost: PropTypes.func.isRequired,
+  createPostRequest: PropTypes.func.isRequired,
   getUserRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

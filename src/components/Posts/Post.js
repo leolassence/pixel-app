@@ -11,8 +11,8 @@ const Post = props => {
     post,
     isLoggedIn,
     history,
-    deletePost,
-    likePost,
+    deletePostRequest,
+    likePostRequest,
   } = props;
 
   return (
@@ -21,7 +21,7 @@ const Post = props => {
       <div className="photo__info">
         <div className="photo__icons">
           <PostLike
-            likePost={likePost}
+            likePostRequest={likePostRequest}
             postId={post.postId}
             likes={post.likes}
             isLoggedIn={isLoggedIn}
@@ -29,7 +29,7 @@ const Post = props => {
           <PostAuthorActions
             post={post}
             isLoggedIn={isLoggedIn}
-            deletePost={deletePost}
+            deletePostRequest={deletePostRequest}
             history={history}
           />
         </div>
@@ -79,8 +79,8 @@ Post.propTypes = {
     ),
     likes: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  deletePost: PropTypes.func.isRequired,
-  likePost: PropTypes.func.isRequired,
+  deletePostRequest: PropTypes.func.isRequired,
+  likePostRequest: PropTypes.func.isRequired,
 };
 
 export default Post;
