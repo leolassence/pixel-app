@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects';
 import api from '../api';
 import { searchSuccess } from '../actions/search';
+import { parseError } from '../actions/errors';
 import { SEARCH_ACTIONS } from '../constants';
 
 
@@ -18,7 +19,9 @@ function* search(action) {
 
     yield put(searchSuccess(data));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 

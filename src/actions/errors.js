@@ -1,19 +1,12 @@
 import { ERROR_ACTIONS } from '../constants';
 
-function parseError(errorMessage) {
-  return {
-    type: ERROR_ACTIONS.PARSE_ERROR,
-    payload: errorMessage
-  };
-}
+export const parseError = ({ error }) => ({
+  type: ERROR_ACTIONS.PARSE_ERROR,
+  payload: {
+    error
+  }
+});
 
-function resetError() {
-  return {
-    type: ERROR_ACTIONS.RESET_ERROR
-  };
-}
-
-export {
-  parseError,
-  resetError
-};
+export const resetError = () => ({
+  type: ERROR_ACTIONS.RESET_ERROR,
+});

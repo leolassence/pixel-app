@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects';
 
 import api from '../api';
+import { parseError } from '../actions/errors';
 import { createCommentSuccess } from '../actions/comments';
 import { COMMENT_ACTIONS } from '../constants';
 
@@ -19,7 +20,9 @@ function* createComment(action) {
 
     yield put(createCommentSuccess(updatedPost));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 

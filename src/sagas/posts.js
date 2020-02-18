@@ -17,7 +17,7 @@ import {
 } from '../actions/posts';
 
 import api from '../api';
-
+import { parseError } from '../actions/errors';
 import { POST_ACTIONS } from '../constants';
 
 function* getPosts(action) {
@@ -31,7 +31,9 @@ function* getPosts(action) {
 
     yield put(getPostsSuccess(data));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -51,7 +53,9 @@ function* getPost(action) {
 
     yield put(getPostSuccess(data));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -77,7 +81,9 @@ function* createPost(action) {
 
     yield history.push(`/post/${createdPost.postId}`);
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -109,7 +115,9 @@ function* updatePost(action) {
 
     yield history.push(`/post/${updatedPost.postId}`);
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -128,7 +136,9 @@ function* deletePost({ postId, history }) {
 
     yield history.push('/');
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
@@ -159,7 +169,9 @@ function* likePost(action) {
 
     yield put(likePostSuccess(likedPost));
   } catch (e) {
-    console.log('E', e);
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
   }
 }
 
