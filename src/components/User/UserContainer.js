@@ -7,7 +7,8 @@ import User from './User';
 const mapStateToProps = state => ({
   isLoggedIn: state.authentification.isLoggedIn,
   user: state.users.user,
-  postList: state.posts.postList
+  postList: state.posts.postList,
+  postListHasResults: Boolean(state.posts.postList.length)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-
+import reduxLogger from 'redux-logger';
 import registerServiceWorker from './registerServiceWorker';
 import routes from './routes';
 import reducers from './reducers';
@@ -12,7 +12,7 @@ import { setAuthentification } from './actions';
 const invariant = require('redux-immutable-state-invariant').default();
 
 const middleware = process.env.NODE_ENV !== 'production'
-  ? [invariant, thunk] : [thunk];
+  ? [invariant, thunk, reduxLogger] : [thunk];
 
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
