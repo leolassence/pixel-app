@@ -9,7 +9,7 @@ const Header = props => {
   const {
     isLoggedIn,
     signOutUser,
-    search,
+    searchRequest,
     location,
     history,
   } = props;
@@ -27,7 +27,7 @@ const Header = props => {
       <Search
         location={location}
         history={history}
-        search={search}
+        searchRequest={searchRequest}
       />
       <div className="navigation__icons">
         <HeaderAuthenticateLinks
@@ -42,7 +42,7 @@ const Header = props => {
 Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   signOutUser: PropTypes.func.isRequired,
-  search: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,

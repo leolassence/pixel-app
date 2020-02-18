@@ -25,11 +25,21 @@ import {
   likePost,
 } from './posts';
 
-import createComment from './comments';
-import search from './search';
+import {
+  createCommentRequest,
+  createCommentSuccess,
+} from './comments';
+
+import {
+  searchRequest,
+  searchSuccess,
+} from './search';
 
 export {
-  search,
+  createCommentRequest,
+  createCommentSuccess,
+  searchRequest,
+  searchSuccess,
   parseError,
   resetError,
   setAuthentification,
@@ -45,5 +55,4 @@ export {
   followUser,
   getPosts,
   deletePost,
-  createComment,
 };

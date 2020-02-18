@@ -24,7 +24,7 @@ class CommentForm extends Component {
 
     schema.isValid({ message }).then(valid => {
       if (valid) {
-        this.props.createComment({ message, postId });
+        this.props.createCommentRequest({ message, postId });
         this.setState({ message: '' });
       }
     });
@@ -57,7 +57,7 @@ CommentForm.defaultProps = {};
 
 CommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
-  createComment: PropTypes.func.isRequired,
+  createCommentRequest: PropTypes.func.isRequired,
 };
 
 export default CommentForm;

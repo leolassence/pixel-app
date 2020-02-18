@@ -5,13 +5,13 @@ const Search = props => {
   const {
     location,
     history,
-    search,
+    searchRequest,
   } = props;
 
   const handleChange = e => {
     if (location.pathname !== '/search') history.push('/search');
 
-    return search(String(e.target.value));
+    return searchRequest(String(e.target.value));
   };
 
   return (
@@ -23,7 +23,7 @@ const Search = props => {
 };
 
 Search.propTypes = {
-  search: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,

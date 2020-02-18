@@ -61,7 +61,7 @@ export default function PostReducer(state = initialState, action) {
         post: state.post.postId === deletedPostId ? {} : state.post,
       };
     }
-    case COMMENT_ACTIONS.CREATE_COMMENT: {
+    case COMMENT_ACTIONS.CREATE_COMMENT_SUCCESS: {
       const updatedPost = action.payload;
 
       return {
