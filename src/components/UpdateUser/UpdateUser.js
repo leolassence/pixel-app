@@ -20,7 +20,12 @@ class UpdateUser extends Component {
     const { history, updateUserRequest } = this.props;
     const { user: { userId } } = this.props;
 
-    updateUserRequest({ userId, data, formData }, history);
+    updateUserRequest({
+      userId,
+      data,
+      formData,
+      history
+    });
   }
 
   render() {

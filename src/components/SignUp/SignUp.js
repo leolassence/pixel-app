@@ -10,8 +10,9 @@ class SignUp extends Component {
   handleSubmit = ({ email, username, password }) => this.props.signUpUserRequest({
     email,
     username,
-    password
-  }, this.props.history);
+    password,
+    history: this.props.history
+  });
 
   render() {
     return (

@@ -14,7 +14,7 @@ class UpdatePost extends Component {
       getPostRequest,
     } = this.props;
 
-    getPostRequest(postId, history);
+    getPostRequest({ postId, history });
   }
 
   handleSubmit = ({ data, formData }) => {
@@ -24,7 +24,12 @@ class UpdatePost extends Component {
       post: { postId },
     } = this.props;
 
-    updatePostRequest({ postId, data, formData }, history);
+    updatePostRequest({
+      postId,
+      data,
+      formData,
+      history
+    });
   }
 
   shouldComponentRender() {

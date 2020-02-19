@@ -1,6 +1,6 @@
 import { POST_ACTIONS } from '../constants';
 
-export const getPostsRequest = (query, options) => ({
+export const getPostsRequest = ({ query, options }) => ({
   type: POST_ACTIONS.GET_POSTS_REQUEST,
   payload: {
     query,
@@ -13,7 +13,7 @@ export const getPostsSuccess = data => ({
   payload: data,
 });
 
-export const getPostRequest = (postId, history) => ({
+export const getPostRequest = ({ postId, history }) => ({
   type: POST_ACTIONS.GET_POST_REQUEST,
   payload: {
     postId,
@@ -26,7 +26,7 @@ export const getPostSuccess = data => ({
   payload: data,
 });
 
-export const createPostRequest = ({ formData, data }, history) => ({
+export const createPostRequest = ({ formData, data, history }) => ({
   type: POST_ACTIONS.CREATE_POST_REQUEST,
   payload: { formData, data, history },
 });
@@ -36,7 +36,12 @@ export const createPostSuccess = data => ({
   payload: data,
 });
 
-export const updatePostRequest = ({ postId, formData, data }, history) => ({
+export const updatePostRequest = ({
+  postId,
+  formData,
+  data,
+  history
+}) => ({
   type: POST_ACTIONS.UPDATE_POST_REQUEST,
   payload: {
     postId,
@@ -51,7 +56,7 @@ export const updatePostSuccess = data => ({
   payload: data,
 });
 
-export const deletePostRequest = (postId, history) => ({
+export const deletePostRequest = ({ postId, history }) => ({
   type: POST_ACTIONS.DELETE_POST_REQUEST,
   payload: {
     postId,

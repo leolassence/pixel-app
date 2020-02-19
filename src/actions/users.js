@@ -12,7 +12,12 @@ export const getUserSuccess = data => ({
   payload: data,
 });
 
-export const updateUserRequest = ({ userId, formData, data }, history) => ({
+export const updateUserRequest = ({
+  userId,
+  formData,
+  data,
+  history
+}) => ({
   type: USER_ACTIONS.UPDATE_USER_REQUEST,
   payload: {
     userId,
@@ -21,6 +26,7 @@ export const updateUserRequest = ({ userId, formData, data }, history) => ({
     history,
   },
 });
+
 
 export const updateUserSuccess = data => ({
   type: USER_ACTIONS.UPDATE_USER_SUCCESS,

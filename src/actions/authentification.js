@@ -5,7 +5,7 @@ export const setAuthentification = isLoggedIn => ({
   payload: isLoggedIn,
 });
 
-export const signInUserRequest = ({ signInId, password }, history) => ({
+export const signInUserRequest = ({ signInId, password, history }) => ({
   type: AUTH_ACTIONS.SIGNIN_USER_REQUEST,
   payload: {
     signInId,
@@ -14,7 +14,12 @@ export const signInUserRequest = ({ signInId, password }, history) => ({
   },
 });
 
-export const signUpUserRequest = ({ email, username, password }, history) => ({
+export const signUpUserRequest = ({
+  email,
+  username,
+  password,
+  history,
+}) => ({
   type: AUTH_ACTIONS.SIGNUP_USER_REQUEST,
   payload: {
     email,

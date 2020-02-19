@@ -12,7 +12,7 @@ class PostPage extends Component {
       history,
     } = this.props;
 
-    getPostRequest(postId, history);
+    getPostRequest({ postId, history });
   }
 
   renderPost = () => {

@@ -10,7 +10,8 @@ module.exports = {
   "env": {
     "node": true,
     "es6": true,
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",
