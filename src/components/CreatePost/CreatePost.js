@@ -5,16 +5,16 @@ import PostForm from '../PostForm';
 
 class CreatePost extends Component {
   componentDidMount() {
-    const { getUser } = this.props;
+    const { getUserRequest } = this.props;
     const username = localStorage.getItem('username');
 
-    getUser({ username });
+    getUserRequest({ username });
   }
 
   handleSubmit = ({ data, formData }) => {
-    const { createPost, history } = this.props;
+    const { createPostRequest, history } = this.props;
 
-    createPost({ data, formData }, history);
+    createPostRequest({ data, formData }, history);
   }
 
   shouldComponentRender() {
@@ -40,8 +40,8 @@ class CreatePost extends Component {
 }
 
 CreatePost.propTypes = {
-  createPost: PropTypes.func.isRequired,
-  getUser: PropTypes.func.isRequired,
+  createPostRequest: PropTypes.func.isRequired,
+  getUserRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,

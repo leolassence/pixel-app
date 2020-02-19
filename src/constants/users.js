@@ -1,5 +1,8 @@
 export default {
-  GET_USER: 'users/get-user',
-  UPDATE_USER: 'users/update-user',
-  FOLLOW_USER: 'users/follow-user',
+  GET_USER_REQUEST: 'users/get-user-request',
+  GET_USER_SUCCESS: 'users/get-user-success',
+  UPDATE_USER_REQUEST: 'users/update-user-request',
+  UPDATE_USER_SUCCESS: 'users/update-user-success',
+  FOLLOW_USER_REQUEST: 'users/follow-user-request',
+  FOLLOW_USER_SUCCESS: 'users/follow-user-success',
 };

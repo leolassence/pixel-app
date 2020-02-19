@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProfileImageResolver from '../Common';
 import UserFollowButton from './UserFollowButton';
 
-const UserInfos = ({ isLoggedIn, user, followUser }) => (
+const UserInfos = ({ isLoggedIn, user, followUserRequest }) => (
   <header className="profile__header">
     <div className="profile__avatar-container">
       <ProfileImageResolver
@@ -21,7 +21,7 @@ const UserInfos = ({ isLoggedIn, user, followUser }) => (
           isLoggedIn={isLoggedIn}
           userId={user.userId}
           followers={user.followers}
-          followUser={followUser}
+          followUserRequest={followUserRequest}
         />
       </div>
       <ul className="profile__numbers">
@@ -53,7 +53,7 @@ const UserInfos = ({ isLoggedIn, user, followUser }) => (
 
 UserInfos.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  followUser: PropTypes.func.isRequired,
+  followUserRequest: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string.isRequired,
     username: PropTypes.string,

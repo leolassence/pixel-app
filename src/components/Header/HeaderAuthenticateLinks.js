@@ -25,7 +25,9 @@ const HeaderAuthenticateLinks = props => {
           className="navigation__link"
           type="button"
           title="Sign Out"
-          onClick={() => props.signOutUser()}
+          onClick={() => props.signOutUserRequest({
+            history: props.history
+          })}
         >
           <i className="fa fa-sign-out" />
         </Link>
@@ -41,8 +43,9 @@ const HeaderAuthenticateLinks = props => {
 };
 
 HeaderAuthenticateLinks.propTypes = {
+  history: PropTypes.shape({}).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  signOutUser: PropTypes.func.isRequired
+  signOutUserRequest: PropTypes.func.isRequired
 };
 
 export default HeaderAuthenticateLinks;

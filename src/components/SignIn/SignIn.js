@@ -7,7 +7,7 @@ import phone from '../../assets/images/phone.png';
 import logo from '../../assets/images/logo.png';
 
 class SignIn extends Component {
-  handleSubmit = ({ signInId, password }) => this.props.signInUser({
+  handleSubmit = ({ signInId, password }) => this.props.signInUserRequest({
     signInId,
     password,
   },
@@ -76,7 +76,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
   history: PropTypes.shape({}),
-  signInUser: PropTypes.func.isRequired
+  signInUserRequest: PropTypes.func.isRequired
 };
 
 SignIn.defaultProps = {

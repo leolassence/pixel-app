@@ -7,10 +7,10 @@ const UserFollowButton = props => {
     const {
       userId,
       isLoggedIn,
-      followUser,
+      followUserRequest,
     } = props;
 
-    if (isLoggedIn) return followUser(userId);
+    if (isLoggedIn) return followUserRequest(userId);
 
     return true;
   };
@@ -42,7 +42,7 @@ UserFollowButton.propTypes = {
   userId: PropTypes.string.isRequired,
   followers: PropTypes.arrayOf(PropTypes.string).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  followUser: PropTypes.func.isRequired,
+  followUserRequest: PropTypes.func.isRequired,
 };
 
 export default UserFollowButton;

@@ -7,11 +7,11 @@ const PostAuthorActions = props => {
   const {
     post,
     isLoggedIn,
-    deletePost,
+    deletePostRequest,
     history,
   } = props;
 
-  const handleClickDeletePost = () => deletePost(post.postId, history);
+  const handleClickDeletePost = () => deletePostRequest(post.postId, history);
 
   if (isOwner(isLoggedIn, post.user.username)) {
     const windowMessage = 'Are you sure you wish to delete this post ?';
@@ -50,7 +50,7 @@ PostAuthorActions.propTypes = {
       username: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  deletePost: PropTypes.func.isRequired,
+  deletePostRequest: PropTypes.func.isRequired,
 };
 
 export default PostAuthorActions;

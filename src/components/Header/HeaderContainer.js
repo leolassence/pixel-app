@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
-import { signOutUser, search } from '../../actions';
+import { signOutUserRequest } from '../../actions/authentification';
+import { searchRequest } from '../../actions/search';
+
 import Header from './Header';
 
 const mapStateToProps = state => ({
@@ -10,8 +12,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    signOutUser,
-    search,
+    signOutUserRequest,
+    searchRequest,
   }, dispatch)
 });
 
