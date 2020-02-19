@@ -12,6 +12,7 @@ import {
   followUserSuccess
 } from '../actions/users';
 
+import { getPostsSuccess } from '../actions/posts';
 import api from '../api';
 import { parseError } from '../actions/errors';
 import { USER_ACTIONS } from '../constants';
@@ -93,11 +94,37 @@ function* watchFollowUserRequest() {
 }
 
 
+function* getUserPosts(action) {
+  try {
+    const { username, options } = action.payload;
+
+    const user = yield call(api.users.getUser, {
+      username,
+    });
+
+    const posts = yield call(api.posts.getPosts, {
+      query: { userId: user.data.userId },
+      options,
+    });
+
+    yield put(getUserSuccess(user.data));
+    yield put(getPostsSuccess(posts.data));
+  } catch (e) {
+    yield put(parseError({
+      error: e.response.data.message,
+    }));
+  }
+}
+
+function* watchGetUserPostsRequest() {
+  yield takeLatest(USER_ACTIONS.GET_USER_POSTS_REQUEST, getUserPosts);
+}
+
 const usersSagas = [
   fork(watchGetUserRequest),
   fork(watchUpdateUserRequest),
   fork(watchFollowUserRequest),
+  fork(watchGetUserPostsRequest),
 ];
-
 
 export default usersSagas;

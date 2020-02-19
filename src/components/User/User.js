@@ -4,26 +4,20 @@ import _ from 'lodash';
 import UserInfos from './UserInfos';
 import UserRenderPosts from './UserRenderPosts';
 
-class Profile extends Component {
-  constructor(props) {
-    super(props);
-
+class User extends Component {
+  componentDidMount() {
     const {
       match: {
         params: { username }
       },
-      getUserRequest,
-      getPostsRequest,
+      getUserPostsRequest,
     } = this.props;
 
-    getUserRequest({ username });
-    // getPostsRequest({ userId: user.userId }, { limit: 12 });
-
-    getPostsRequest({}, { limit: 12 });
-  }
-
-  componentDidMount() {
-    // FIX userId: user.userId
+    getUserPostsRequest({
+      username,
+      query: {},
+      options: { limit: 12 },
+    });
   }
 
   shouldComponentRender() {
@@ -63,7 +57,7 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+User.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -73,8 +67,7 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  getUserRequest: PropTypes.func.isRequired,
-  getPostsRequest: PropTypes.func.isRequired,
+  getUserPostsRequest: PropTypes.func.isRequired,
   followUserRequest: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string,
@@ -93,4 +86,4 @@ Profile.propTypes = {
   })).isRequired,
 };
 
-export default Profile;
+export default User;

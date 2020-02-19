@@ -2,39 +2,18 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
-// import { isOwner } from '../../helpers';
+import { isOwner } from '../../helpers';
 
 class UpdateUser extends Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  //   this.state = { editReady: false };
-  // }
-
   componentDidMount() {
     const {
       match: {
         params: { username }
       },
       getUserRequest,
-      // user,
-      // history,
     } = this.props;
 
     getUserRequest({ username });
-
-    // FIX
-    // .then(({ payload }) => {
-    //   if (isOwner(true, payload.username)) {
-    //     this.setState({
-    //       editReady: true,
-    //       user: payload
-    //     });
-    //   } else {
-    //     this.setState({ editReady: false });
-    //     history.push('/notfound');
-    //   }
-    // });
   }
 
   handleSubmit = ({ data, formData }) => {
@@ -45,16 +24,19 @@ class UpdateUser extends Component {
   }
 
   render() {
-    // const { editReady, user } = this.state;
-    const { user } = this.props;
+    const { user, history } = this.props;
 
     if (!_.isEmpty(user)) {
-      return (
-        <UserForm
-          handleSubmit={this.handleSubmit}
-          user={user}
-        />
-      );
+      if (isOwner(true, user.username)) {
+        return (
+          <UserForm
+            handleSubmit={this.handleSubmit}
+            user={user}
+          />
+        );
+      }
+
+      history.push('/notfound');
     }
 
     return null;
