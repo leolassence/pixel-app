@@ -38,3 +38,12 @@ export const followUserSuccess = data => ({
   type: USER_ACTIONS.FOLLOW_USER_SUCCESS,
   payload: data,
 });
+
+export const getUserPostsRequest = ({ username, query, options }) => ({
+  type: USER_ACTIONS.GET_USER_POSTS_REQUEST,
+  payload: {
+    username,
+    query,
+    options,
+  },
+});
