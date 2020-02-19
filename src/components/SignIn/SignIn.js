@@ -10,8 +10,8 @@ class SignIn extends Component {
   handleSubmit = ({ signInId, password }) => this.props.signInUserRequest({
     signInId,
     password,
-  },
-  this.props.history);
+    history: this.props.history
+  });
 
   render() {
     return (

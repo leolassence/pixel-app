@@ -11,7 +11,10 @@ const PostAuthorActions = props => {
     history,
   } = props;
 
-  const handleClickDeletePost = () => deletePostRequest(post.postId, history);
+  const handleClickDeletePost = () => deletePostRequest({
+    postId: post.postId,
+    history,
+  });
 
   if (isOwner(isLoggedIn, post.user.username)) {
     const windowMessage = 'Are you sure you wish to delete this post ?';

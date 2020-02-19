@@ -14,7 +14,7 @@ class CreatePost extends Component {
   handleSubmit = ({ data, formData }) => {
     const { createPostRequest, history } = this.props;
 
-    createPostRequest({ data, formData }, history);
+    createPostRequest({ data, formData, history });
   }
 
   shouldComponentRender() {

@@ -6,7 +6,7 @@ class Home extends Component {
   componentDidMount() {
     const { getPostsRequest } = this.props;
 
-    getPostsRequest({}, { limit: 10 });
+    getPostsRequest({ query: {}, options: { limit: 10 } });
   }
 
   renderPosts = () => {
