@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPost } from '../../actions';
+import { getPostRequest } from '../../actions/posts';
 import PostPage from './PostPage';
 
 const mapStateToProps = state => ({
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    getPost
+    getPostRequest
   }, dispatch)
 });
 

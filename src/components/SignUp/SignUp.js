@@ -7,7 +7,7 @@ import phone from '../../assets/images/phone.png';
 import logo from '../../assets/images/logo.png';
 
 class SignUp extends Component {
-  handleSubmit = ({ email, username, password }) => this.props.signUpUser({
+  handleSubmit = ({ email, username, password }) => this.props.signUpUserRequest({
     email,
     username,
     password
@@ -92,7 +92,7 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   history: PropTypes.shape({}),
-  signUpUser: PropTypes.func.isRequired
+  signUpUserRequest: PropTypes.func.isRequired
 };
 
 SignUp.defaultProps = {

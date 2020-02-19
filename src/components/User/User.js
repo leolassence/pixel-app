@@ -4,46 +4,44 @@ import _ from 'lodash';
 import UserInfos from './UserInfos';
 import UserRenderPosts from './UserRenderPosts';
 
-class Profile extends Component {
+class User extends Component {
   componentDidMount() {
     const {
       match: {
         params: { username }
       },
-      history,
-      getUser,
-      getPosts,
+      getUserPostsRequest,
     } = this.props;
 
-    if (!username) history.push('/notfound');
-
-    getUser({ username }).then(({ payload }) => {
-      getPosts({ userId: payload.userId }, { limit: 12 });
+    getUserPostsRequest({
+      username,
+      query: {},
+      options: { limit: 12 },
     });
   }
 
   shouldComponentRender() {
-    const { postList, user } = this.props;
+    const { user, postList } = this.props;
     return (postList && !_.isEmpty(user));
   }
 
   render() {
-    const {
-      user,
-      postList,
-      history,
-      followUser,
-      isLoggedIn,
-    } = this.props;
-
     if (this.shouldComponentRender()) {
+      const {
+        user,
+        postList,
+        history,
+        followUserRequest,
+        isLoggedIn,
+      } = this.props;
+
       return (
         <main className="profile-container">
           <section className="profile">
             <UserInfos
               user={user}
               isLoggedIn={isLoggedIn}
-              followUser={followUser}
+              followUserRequest={followUserRequest}
             />
             <UserRenderPosts
               postList={postList}
@@ -59,7 +57,7 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+User.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -69,9 +67,8 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  getUser: PropTypes.func.isRequired,
-  getPosts: PropTypes.func.isRequired,
-  followUser: PropTypes.func.isRequired,
+  getUserPostsRequest: PropTypes.func.isRequired,
+  followUserRequest: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userId: PropTypes.string,
     username: PropTypes.string,
@@ -89,4 +86,4 @@ Profile.propTypes = {
   })).isRequired,
 };
 
-export default Profile;
+export default User;

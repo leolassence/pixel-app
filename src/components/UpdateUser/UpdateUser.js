@@ -1,54 +1,42 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import UserForm from './UserForm';
 import { isOwner } from '../../helpers';
 
 class UpdateUser extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { editReady: false };
-  }
-
   componentDidMount() {
     const {
       match: {
         params: { username }
       },
-      getUser,
-      history,
+      getUserRequest,
     } = this.props;
 
-    getUser({ username }).then(({ payload }) => {
-      if (isOwner(true, payload.username)) {
-        this.setState({
-          editReady: true,
-          user: payload
-        });
-      } else {
-        this.setState({ editReady: false });
-        history.push('/notfound');
-      }
-    });
+    getUserRequest({ username });
   }
 
   handleSubmit = ({ data, formData }) => {
-    const { history, updateUser } = this.props;
-    const { user: { userId } } = this.state;
+    const { history, updateUserRequest } = this.props;
+    const { user: { userId } } = this.props;
 
-    updateUser({ userId, data, formData }, history);
+    updateUserRequest({ userId, data, formData }, history);
   }
 
   render() {
-    const { editReady, user } = this.state;
+    const { user, history } = this.props;
 
-    if (editReady) {
-      return (
-        <UserForm
-          handleSubmit={this.handleSubmit}
-          user={user}
-        />
-      );
+    if (!_.isEmpty(user)) {
+      if (isOwner(true, user.username)) {
+        return (
+          <UserForm
+            handleSubmit={this.handleSubmit}
+            user={user}
+          />
+        );
+      }
+
+      history.push('/notfound');
     }
 
     return null;
@@ -64,8 +52,12 @@ UpdateUser.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  updateUser: PropTypes.func.isRequired,
-  getUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    userId: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired,
+  updateUserRequest: PropTypes.func.isRequired,
+  getUserRequest: PropTypes.func.isRequired,
 };
 
 export default UpdateUser;

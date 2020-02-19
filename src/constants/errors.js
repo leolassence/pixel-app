@@ -1,4 +1,4 @@
 export default {
-  PARSE_ERROR: 'PARSE_ERROR',
-  RESET_ERROR: 'RESET_ERROR',
+  PARSE_ERROR: 'errors/parse-error',
+  RESET_ERROR: 'errors/reset-error',
 };

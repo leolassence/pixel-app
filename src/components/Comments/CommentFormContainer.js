@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createComment } from '../../actions';
+import { createCommentRequest } from '../../actions/comments';
 import CommentForm from './CommentForm';
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
-    createComment
+    createCommentRequest
   }, dispatch)
 });
 

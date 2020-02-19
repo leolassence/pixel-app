@@ -8,11 +8,11 @@ class PostPage extends Component {
       match: {
         params: { postId }
       },
-      getPost,
+      getPostRequest,
       history,
     } = this.props;
 
-    getPost(postId, history);
+    getPostRequest(postId, history);
   }
 
   renderPost = () => {
@@ -43,7 +43,7 @@ PostPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  getPost: PropTypes.func.isRequired,
+  getPostRequest: PropTypes.func.isRequired,
   post: PropTypes.shape({}).isRequired,
 };
 
